@@ -1,8 +1,8 @@
-from input import input_generator
+import pandas as pd
 from course import Course
 from student import Student
 from iaf import IAF
-import pandas as pd
+from insights import insights
 
 
 def get_input():
@@ -12,24 +12,21 @@ def get_input():
     students = [Student(int(i["Student Roll Number"]),i["Student Name"],[i["Pref "+str(j+1)] for j in range(30)],int(i["No. of Courses Required"])) for ind,i in studs.iterrows()]
     return courses, students
 
+def write_output(courses,students):
+    max_req = max([s.req for s in students])
+    df1 = pd.DataFrame([[s.roll,s.name]+s.alloc+['' for _ in range(max_req-len(s.alloc))] for s in students], columns=["Student Roll Number","Student Name"]+["Allocated Course "+str(i+1) for i in range(max_req)])
+    df2 = pd.DataFrame([[c.code,c.name,c.cap,", ".join([str(roll) for roll in c.students])] for c in courses], columns=["Course Code","Course Name", "Course Cap","Allocated Students"])
+    df1.to_csv("Students Allocation.csv")
+    df2.to_csv("Courses Allocation.csv")
+
 
 def main():
     courses,students = get_input()
     solver = IAF(courses,students)
     solver.run()
-    print("HSS Course Allocation")
-    print("-"*30)
-    for c in courses:
-        print(c)
-        print()
-    print("-"*30)
-    # Testing Output
-    for s in students:
-        if len(s.alloc)<s.req:
-            print(s.roll,str(len(s.alloc))+'/'+str(s.req),"courses alloted")
-    for s in students:
-        if len(s.alloc)==3:
-            print(s.roll,str(len(s.alloc))+'/'+str(s.req),"courses alloted")
+    write_output(courses,students)
+    insights(courses,students)
+
 
 if __name__=='__main__':
     main()

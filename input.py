@@ -18,15 +18,15 @@ def input_generator(c):
                 S_prefs[i].append(j)
     l = []
     for i in S:
-        l.append([" ",i,S_req[i]]+S_prefs[i])
-    df1 = pd.DataFrame(l,columns = ["Student Name", "Student Roll Number", "No. of Courses Required"]+["Pref "+str(i+1) for i in range(c)])
+        l.append([i," ",S_req[i]]+S_prefs[i])
+    df1 = pd.DataFrame(l,columns = ["Student Roll Number","Student Name", "No. of Courses Required"]+["Pref "+str(i+1) for i in range(c)])
     df1.to_csv("students_data.csv")
     q = {}
     l1 = []
     for i in C:
         q[i] = 40
-        l1.append([" ",i,q[i]])
-    df2 = pd.DataFrame(l1,columns = ["Course Name", "Course Code", "Course Cap"])
+        l1.append([i," ",q[i]])
+    df2 = pd.DataFrame(l1,columns = ["Course Code", "Course Name", "Course Cap"])
     df2.to_csv("courses_data.csv")
 
     return C,q,S,S_prefs,S_req

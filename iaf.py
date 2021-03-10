@@ -1,5 +1,3 @@
-from course import Course
-from student import Student
 from random import sample
 
 class IAF:

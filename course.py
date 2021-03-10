@@ -1,7 +1,7 @@
 class Course:
     def __init__(self,code: str, name: str, cap: int):
         self.code = code
-        self.name = name
+        self.name = name if name else ''
         self.cap = cap
         self.students = []
         # Private vars
