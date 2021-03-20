@@ -770,10 +770,6 @@ a:hover {
   border-radius: 10px;
 }
 
-.required {
-  color: #d93025;
-}
-
 @media (min-width: 768px) {
   .post-box,
   .form-comments,
@@ -888,4 +884,18 @@ h1, h2, h3, h4, h5, h6{
 
 p{
   font-family: 'Merriweather', 'Raleway', 'Roboto', 'Montserrat', sans-serif;
+}
+
+.label-description{
+  font-size: 0.75rem;
+}
+
+.required {
+  color: #d93025;
+}
+
+.error-msg{
+  font-size: 0.75rem;
+  display: none;
+  color: #d93025;
 }

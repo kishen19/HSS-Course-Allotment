@@ -5,7 +5,6 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <link rel="shortcut icon" type="image/jpg" href="assets/img/iitgn_logo-1.png"/>
-
   <title>HSS Course Allotment</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
@@ -36,7 +35,6 @@
           <div class="line-mf mb-5" style="background-color: white;"></div>
           <h5 class="subtitle-a" style="color: white;"></h5>
         </div>
-        
       </div>
     </div>
   </div>
@@ -67,6 +65,7 @@
                     <br>
                   </p>
                   <input type="text" class="form-control" id="name" name="name" placeholder="Your Answer" />
+                  <p class="error-msg" id="name-error"></p>
                 </div>
               </div>
               
@@ -77,6 +76,7 @@
                     <br>
                   </p>
                   <input type="text" class="form-control" id="roll" name="roll" placeholder="Your Answer" />
+                  <p class="error-msg" id="roll-error"></p>
                 </div>
               </div>
 
@@ -87,13 +87,14 @@
                     <br>
                   </p>
                   <select class="form-control" id="program" name="program" placeholder="Your Answer">
-                    <option>-Select-</option>
-                    <option>B.Tech</option>
-                    <option>M.Tech</option>
-                    <option>MSc</option>
-                    <option>MA</option>
-                    <option>PhD</option>
+                    <option id="program-0" value="-Select-">-Select-</option>
+                    <option id="program-1" value="B.Tech">B.Tech</option>
+                    <option id="program-2" value="M.Tech">M.Tech</option>
+                    <option id="program-3" value="MSc">MSc</option>
+                    <option id="program-4" value="MA">MA</option>
+                    <option id="program-5" value="PhD">PhD</option>
                   </select>
+                  <p class="error-msg" id="program-error"></p>
                 </div>
               </div>
 
@@ -102,10 +103,11 @@
                   <p>
                     Year of Joining <sup class="required">*</sup>
                     <br>
-                    <span style="font-size: 0.75rem;">Ex: 2017</span>
+                    <span class="label-description">Ex: 2017</span>
                     <br>
                   </p>
                   <input type="text" class="form-control" id="year" name="year" placeholder="Your Answer" />
+                  <p class="error-msg" id="year-error"></p>
                 </div>
               </div>
 
@@ -114,14 +116,14 @@
                   <p>
                     Minors? <sup class="required">*</sup>
                     <br>
-                    <span style="font-size: 0.75rem;">Are you pursuing a Minor in HSS or Management?
+                    <span class="label-description">Are you pursuing a Minor in HSS or Management?
                     </span>
                     <br>
                   </p>
                   <div class="w-100">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="hss" id="minor-hss"/>
-                      <label class="form-check-label" for="minor-hss">HSS</label>
+                      <input class="form-check-input" type="checkbox" value="hss" id="minors-hss"/>
+                      <label class="form-check-label" for="minors-hss">HSS</label>
                     </div>
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="management" id="minors-management"/>
@@ -132,15 +134,72 @@
                       <label class="form-check-label" for="minors-none">None</label>
                     </div>
                   </div>
+                  <p class="error-msg" id="minors-error"></p>
+                </div>
+              </div>
+
+              <div class="post-box remove-padding">
+                <div class="row widget-sidebar form-group">
+                  <p>
+                    Number of Preferences <sup class="required">*</sup>
+                    <br>
+                    <span class="label-description">Enter the number of course preferences you wish to provide.</span>
+                    <br>
+                  </p>
+                  <input type="number" min="1" class="form-control" id="num-pref" name="num-pref" value = "1"/>
+                  <p class="error-msg" id="num-pref-error"></p>
+                </div>
+              </div>
+
+              <div id="preferences">
+                <div id="preference-1" class="post-box remove-padding">
+                  <div class="row widget-sidebar form-group">
+                    <p>
+                      Preference #1 <sup class="required">*</sup>
+                      <br>
+                    </p>
+                    <select class="form-control" id="pref1" name="pref1" placeholder="Your Answer">
+                      <option value="-Select-">-Select-</option>
+                    </select>
+                    <p class="error-msg" id="pref1-error"></p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="post-box remove-padding">
+                <div class="row widget-sidebar form-group">
+                  <p>
+                    Number of least preferred courses 
+                    <br>
+                    <span class="label-description">Enter the number of courses you don't want to get allocated.</span>
+                    <br>
+                  </p>
+                  <input type="number" min="1" class="form-control" id="num-least-pref" name="num-least-pref" value = "1"/>
+                  <p class="error-msg" id="num-least-pref-error"></p>
+                </div>
+              </div>
+
+              <div id="least_preferred_courses">
+                <div id="course-1" class="post-box remove-padding">
+                  <div class="row widget-sidebar form-group">
+                    <p>
+                      Course #1 <sup class="required">*</sup>
+                      <br>
+                    </p>
+                    <select class="form-control" id="course1" name="course1" placeholder="Your Answer">
+                      <option value="-Select-">-Select-</option>
+                    </select>
+                    <p class="error-msg" id="course1-error"></p>
+                  </div>
                 </div>
               </div>
 
               <div class="post-box remove-padding mb-4">
                 <div class="row widget-sidebar form-group">
                   <p>
-                    Other Info? <sup class="required">*</sup>
+                    Other Info?
                     <br>
-                    <span style="font-size: 0.75rem;">Any other information you want to provide?</span>
+                    <span class="label-description">Any other information you want to provide?</span>
                     <br>
                   </p>
                   <input type="text" class="form-control" id="other-info" name="other-info" placeholder="Your Answer" />
@@ -176,6 +235,7 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/form.js"></script>
 
 </body>
 
