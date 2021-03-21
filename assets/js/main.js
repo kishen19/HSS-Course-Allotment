@@ -98,7 +98,7 @@
   var programs = ["-Select-","B.Tech","M.Tech","MSc","MA","PhD"];
   var courses = ["HS 104 - Foundational Sanskrit", "HS 108 - Japan Studies", "HS 111 - Urdu Script & Poetry", "HS 112 - Urdu Poetry Interpretation", "HS 211 - Exploring India’s Scientific and Technological Heritage","HS 223 - Sanskrit Literature","HS 305 - Perspectives in Psychology", "HS 391 -	Special Topics in HSS: Music Traditions of India", "HS 313 - When You Cannot Experiment: Social Science Methods", "HS 411 - Economic Concepts and Issues in Project Analysis", "HS 425 - Introduction to Archaeology", "HS 491-I - Special Topics in HSS: Indian philosophy through the ages","HS 491-II - Special Topics in HSS: The ‘engineering’ of theatre-making", "HS 491-III - Special Topics in HSS: Storytelling for the Digital Era", "HS 507 - Humanism, Anti-Humanism, and Posthumanism", "HS 510 - Perspectives on Indian Civilization", "HS 512 - Political Thought", "HS 515 - The Politics of the Environment", "HS 518 - Philosophy, Cognition and Psychoanalysis", "HS 519 - Linguistic Anthropology", "HS 610 - A Critical Journey Through Select Thoughts and Theories", "HS 645 - History of India, 1930-1964", "HS 691-I - Special Topics in HSS: Themes in Postcolonialism", "HS 691-II - Special topics in HSS: Applied statistics: Multilevel modeling", "IN 304 - Ancient Indian Technology", "MS 304 - Organizational Behaviour & Human Resource Management (OB & HRM)", "MS 403 - Engineering Entrepreneurship", "MS 491 - Special topics in Management: Marketing Analytics", "HS 691-III - Special Topics in HSS: Abnormal Psychology", "HS 327 (H) - Anthropology, Citizenship and Human Rights (Half Sem course, 2nd Half)", "MS 492 - Special Topics in Management: Finance Management (2 credit course that will run for entire semester, ~2 hours each week)", "MS 491-I - Special Topics in Management: Product Management"];
   var num_courses = courses.length;
-  var temp = '<div id="preference-1" class="post-box remove-padding">\n<div class="row widget-sidebar form-group">\n<p>\nPreference #1 <sup class="required">*</sup>\n <br>\n </p>\n <select class="form-control" id="pref1" name="pref1" placeholder="Your Answer">\n <option value="-Select-">-Select-</option>\n   </select>\n  <p class="error-msg" id="pref1-error"></p>\n  </div>\n</div>'
+  var temp = '<div id="preference-1" class="post-box remove-padding">\n<div class="row widget-sidebar form-group">\n<p>\nPreference #1 <sup class="required">*</sup>\n <br>\n </p>\n <select class="form-control prefs" id="pref1" name="pref1" placeholder="Your Answer">\n <option value="-Select-">-Select-</option>\n   </select>\n  <p class="error-msg" id="pref1-error"></p>\n  </div>\n</div>'
 
   $.fn.add_options = function(e){
     $.each(courses,function(index,value){
@@ -211,6 +211,8 @@
 
   /*--/ Minors? /--*/
   $('#minors-none').change(function(){
+    $('#minors-error').css("display","none");
+    $('#minors-error').text("");
     if($(this).is(":checked")){
       $('#minors-hss').prop("disabled",true);
       $('#minors-management').prop("disabled",true);
@@ -222,6 +224,8 @@
   });
 
   $('#minors-hss').change(function(){
+    $('#minors-error').css("display","none");
+    $('#minors-error').text("");
     if($(this).is(":checked")){
       $('#minors-none').prop("disabled",true);
     }
@@ -237,6 +241,8 @@
   });
 
   $('#minors-management').change(function(){
+    $('#minors-error').css("display","none");
+    $('#minors-error').text("");
     if($(this).is(":checked")){
       $('#minors-none').prop("disabled",true);
     }
@@ -267,7 +273,7 @@
         while(v<=$(this).val()){
           $("#preferences").append(temp);
           $("#preferences .post-box:last").attr("id","preference-"+v);
-          $("#preference-"+v+" p:first").text("Preference #"+v);
+          $("#preference-"+v+" p:first").html("Preference #"+v+'<sup class="required">*</sup>');
           $("#preference-"+v+" .form-control").attr("id","pref"+v);
           $("#preference-"+v+" .form-control").attr("name","pref"+v);
           $("#preference-"+v+" .error-msg").attr("id","pref"+v+"-error");
@@ -284,12 +290,31 @@
           w-=1;
         };
       }
+      var i = 1;
+      while (i<=$('#num-pref').val()){
+        $('#pref'+i+'-error').css("display","none");
+        $('#pref'+i).css("border-color",border_color);
+        $('#pref'+i).css("border-width",border_width);
+        $('#pref'+i+'-error').text("");
+        i+=1;
+      }
     }
     else{
       $('#num-pref-error').css("display","block");
       $('#num-pref-error').text("Number of course preferences must be between 1 and "+num_courses);
       $('#num-pref').css("border-color","#d93025");
       $('#num-pref').css("border-width","3px");
+    }
+  });
+
+  $('.prefs').change(function(){
+    var i = 1;
+    while (i<=$('#num-pref').val()){
+      $('#pref'+i+'-error').css("display","none");
+      $('#pref'+i).css("border-color",border_color);
+      $('#pref'+i).css("border-width",border_width);
+      $('#pref'+i+'-error').text("");
+      i+=1;
     }
   });
 
@@ -366,17 +391,57 @@
       }
     }
 
+    /* Validating Minors */
+    if($('#minors-none').is(':checked') && ($('#minors-hss').is(":checked") || $('#minors-management').is(":checked"))){
+      failed=true;
+      $('#minors-none').prop('checked',false);
+      $('#minors-hss').prop('checked',false);
+      $('#minors-management').prop('checked',false);
+      $('#minors-none').prop('disabled',false);
+      $('#minors-hss').prop('disabled',false);
+      $('#minors-management').prop('disabled',false);
+      $('#minors-error').css("display","block");
+      $('#minors-error').text("Invalid Input");
+    }
+
     /* Validating Number of Preferences */
-    if(!$.isNumeric($('#num-pref').val()) || $('#num-pref').val()>num_courses){
+    if(!$.isNumeric($('#num-pref').val()) || $('#num-pref').val()>num_courses || $('#num-pref').val()<1){
       failed = true;
       $('#num-pref-error').css("display","block");
       $('#num-pref').css("border-color","#d93025");
       $('#num-pref').css("border-width","3px");
-      if (!$('#num-pref').val()){
-        $('#num-pref-error').text("This is a required question");
-      }
-      else{
-        $('#num-pref-error').text("Invalid Input");
+      $('#num-pref-error').text("Number of course preferences must be between 1 and "+num_courses);
+    }
+
+    /* Validating Course Preferences */
+    if(!failed){
+      var num_prefs = parseInt($('#num-pref').val(),10);
+      var i=1;
+      while (i<= num_prefs-1){
+        var j = i+1;
+        if ($('#pref'+i).val()=="-Select-"){
+          failed=true;
+          $('#pref'+i+'-error').css("display","block");
+          $('#pref'+i).css("border-color","#d93025");
+          $('#pref'+i).css("border-width","3px");
+          $('#pref'+i+'-error').text("Please select a course");
+          continue;
+        }
+        while (j <= num_prefs){
+          if ($('#pref'+i).val()==$('#pref'+j).val()){
+            failed=true;
+            $('#pref'+i+'-error').css("display","block");
+            $('#pref'+i).css("border-color","#d93025");
+            $('#pref'+i).css("border-width","3px");
+            $('#pref'+i+'-error').text("A course can be selected exactly once as a preference");
+            $('#pref'+j+'-error').css("display","block");
+            $('#pref'+j).css("border-color","#d93025");
+            $('#pref'+j).css("border-width","3px");
+            $('#pref'+j+'-error').text("A course can be selected exactly once as a preference");
+          }
+          j+=1;
+        }
+        i+=1;
       }
     }
 
