@@ -169,29 +169,18 @@
               <div class="post-box remove-padding">
                 <div class="row widget-sidebar form-group">
                   <p>
-                    Number of least preferred courses 
+                    Number of Courses that you don't want to take 
                     <br>
-                    <span class="label-description">Enter the number of courses you don't want to get allocated.</span>
+                    <span class="label-description">Please enter the number of courses that you don't want to be allocated to. These could be courses that you did previously or courses that you really don't want to take up.</span>
                     <br>
                   </p>
-                  <input type="number" min="1" class="form-control" id="num-least-pref" name="num-least-pref" value = "1"/>
+                  <input type="number" min="0" class="form-control" id="num-least-pref" name="num-least-pref" value = "0"/>
                   <p class="error-msg" id="num-least-pref-error"></p>
                 </div>
               </div>
 
-              <div id="least_preferred_courses">
-                <div id="course-1" class="post-box remove-padding">
-                  <div class="row widget-sidebar form-group">
-                    <p>
-                      Course #1 <sup class="required">*</sup>
-                      <br>
-                    </p>
-                    <select class="form-control" id="course1" name="course1" placeholder="Your Answer">
-                      <option value="-Select-">-Select-</option>
-                    </select>
-                    <p class="error-msg" id="course1-error"></p>
-                  </div>
-                </div>
+              <div id="least-courses">
+                
               </div>
 
               <div class="post-box remove-padding mb-4">
