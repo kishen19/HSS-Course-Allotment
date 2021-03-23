@@ -658,7 +658,7 @@
       "Programme": $('#program').val(),
       "Year": $('#year').val(),
       "Number of courses to register": $('#num-reg').val(),
-      "Number of Preferences": $('#roll').val(),
+      "Number of Preferences": $('#num-pref').val(),
       "Number of least preferences": $('#num-least-pref').val(),
       "Other Info": $('#other-info').val(),
     };
@@ -688,33 +688,12 @@
       form_data['Course #' + i] = $('#course' + i).val();
       i += 1;
     }
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwZWP68FR4MR9QT3-F_p_D3m2AhN7loRLKDc2uxvYhk8HaUgUKPcHxbus__wj-iktaC8w/exec'
-    // $.ajax({
-    //   url: scriptURL,
-    //   type: "POST",
-    //   crossDomain: true,
-    //   headers: {
-    //     "accept": "application/json",
-    //     "Access-Control-Allow-Origin":"*"
-    //   },
-    //   data: JSON.stringify(form_data),
-    //   success: function(response){
-    //     var resp = JSON.parse(response);
-    //     alert(resp.status);
-    //   },
-    //   error: function(xhr,status){
-    //     alert('error');
-    //   }
-    // });
-    fetch(scriptURL, { 
-      method: 'POST',
-      mode: 'no-cors', 
-      body: form_data,
-      credentials: 'include',
-      headers: {
-        'Authorization': 'Basic ' + btoa(this.state.deviceSettings.userName + ":" + this.state.deviceSettings.password),
-      }
-    }).then(response => console.log('Success!', response)).catch(error => console.error('Error!', error.message));
+    console.log(form_data);
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbywNlOA24uj2rIdAC_9gIMr--lE9tGs-PyNZhojGQLD7CvbOhpxO0NyP95r-bYepwMQwA/exec'
+    $.get(scriptURL, form_data, function(response){
+      console.log('Success!', response);
+      return true;
+    })
     return false;
   });
 
