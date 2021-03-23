@@ -289,14 +289,6 @@
           w-=1;
         };
       }
-      var i = 1;
-      while (i<=$('#num-pref').val()){
-        $('#pref'+i+'-error').css("display","none");
-        $('#pref'+i).css("border-color",border_color);
-        $('#pref'+i).css("border-width",border_width);
-        $('#pref'+i+'-error').text("");
-        i+=1;
-      }
     }
     else{
       $('#num-pref-error').css("display","block");
@@ -375,14 +367,6 @@
           $("#course-"+w).remove();
           w-=1;
         };
-      }
-      var i = 1;
-      while (i<=$('#num-least-pref').val()){
-        $('#course'+i+'-error').css("display","none");
-        $('#course'+i).css("border-color",border_color);
-        $('#course'+i).css("border-width",border_width);
-        $('#course'+i+'-error').text("");
-        i+=1;
       }
     }
     else{
