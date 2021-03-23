@@ -690,11 +690,12 @@
     }
     console.log(form_data);
     const scriptURL = 'https://script.google.com/macros/s/AKfycbywNlOA24uj2rIdAC_9gIMr--lE9tGs-PyNZhojGQLD7CvbOhpxO0NyP95r-bYepwMQwA/exec'
+    var flag = false;
     $.get(scriptURL, form_data, function(response){
       console.log('Success!', response);
-      return true;
+      flag = true;
     })
-    return false;
+    return flag;
   });
 
 })(jQuery);
