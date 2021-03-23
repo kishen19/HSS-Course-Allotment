@@ -706,9 +706,15 @@
     //     alert('error');
     //   }
     // });
-    fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: form_data })
-      .then(response => console.log('Success!', response))
-      .catch(error => console.error('Error!', error.message));
+    fetch(scriptURL, { 
+      method: 'POST',
+      mode: 'no-cors', 
+      body: form_data,
+      credentials: 'include',
+      headers: {
+        'Authorization': 'Basic ' + btoa(this.state.deviceSettings.userName + ":" + this.state.deviceSettings.password),
+      }
+    }).then(response => console.log('Success!', response)).catch(error => console.error('Error!', error.message));
     return false;
   });
 
