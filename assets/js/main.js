@@ -1,9 +1,3 @@
-/**
-* Template Name: DevFolio - v2.3.0
-* Template URL: https://bootstrapmade.com/devfolio-bootstrap-portfolio-html-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
 (function($) {
   "use strict";
 
@@ -261,6 +255,9 @@
 
   $('#num-pref').attr("max",num_courses);
   $.fn.add_options('#pref1');
+  $(document).ready(function() {
+    $('#pref1').select2();
+  });
   
   $('#num-pref').change(function(){
     if($('#num-pref').val()>=1 && $('#num-pref').val() <= num_courses){
@@ -279,6 +276,7 @@
           $("#preference-"+v+" .form-control").attr("name","pref"+v);
           $("#preference-"+v+" .error-msg").attr("id","pref"+v+"-error");
           $.fn.add_options('#pref'+v);
+          $('#pref'+v).select2();
           v=v+1;
         };
       }
@@ -309,14 +307,39 @@
   });
 
   $('#preferences').on('change','.prefs',function(){
-    var i = 1;
-    while (i<=$('#num-pref').val()){
-      $('#pref'+i+'-error').css("display","none");
-      $('#pref'+i).css("border-color",border_color);
-      $('#pref'+i).css("border-width",border_width);
-      $('#pref'+i+'-error').text("");
+    var num_prefs = parseInt($('#num-pref').val(),10);
+    var i=1;
+    while (i <= num_prefs){
+      var flag=false;
+      if ($('#pref'+i).val()=="-Select-"){
+        flag=true;
+        $('#pref'+i+'-error').css("display","block");
+        $('#pref'+i).css("border-color","#d93025");
+        $('#pref'+i).css("border-width","3px");
+        $('#pref'+i+'-error').text("Please select a course");
+        i+=1;
+        continue;
+      }
+      var j = 1;
+      while (j <= num_prefs){
+        if (i!=j && $('#pref'+i).val()==$('#pref'+j).val()){
+          flag=true;
+          $('#pref'+i+'-error').css("display","block");
+          $('#pref'+i).css("border-color","#d93025");
+          $('#pref'+i).css("border-width","3px");
+          $('#pref'+i+'-error').text("A course can be selected at most once as a preference");
+        }
+        j+=1;
+      }
+      if (!flag){
+        $('#pref'+i+'-error').css("display","none");
+        $('#pref'+i).css("border-color",border_color);
+        $('#pref'+i).css("border-width",border_width);
+        $('#pref'+i+'-error').text("");
+      }
       i+=1;
     }
+    $.fn.least_prefs_update();
   });
 
   /*--/ Least Preferences /--*/
@@ -340,6 +363,7 @@
           $("#course-"+v+" .form-control").attr("name","course"+v);
           $("#course-"+v+" .error-msg").attr("id","course"+v+"-error");
           $.fn.add_options('#course'+v);
+          $('#course'+v).select2();
           v=v+1;
         };
       }
@@ -369,15 +393,60 @@
     }
   });
 
-  $('#least-courses').on('change','.least-prefs',function(){
-    var i = 1;
-    while (i<=$('#num-least-pref').val()){
-      $('#course'+i+'-error').css("display","none");
-      $('#course'+i).css("border-color",border_color);
-      $('#course'+i).css("border-width",border_width);
-      $('#course'+i+'-error').text("");
+  $.fn.least_prefs_update = function(){
+    var num_prefs = parseInt($('#num-pref').val(),10);
+    var num_least_prefs = parseInt($('#num-least-pref').val(),10);
+    var i=1;
+    while (i<= num_least_prefs){
+      var flag=false;
+      if ($('#course'+i).val()=="-Select-"){
+        flag=true;
+        $('#course'+i+'-error').css("display","block");
+        $('#course'+i).css("border-color","#d93025");
+        $('#course'+i).css("border-width","3px");
+        $('#course'+i+'-error').text("Please select a course");
+        i+=1;
+        continue;
+      }
+      var k = 1;
+      while (k<=num_prefs){
+        if ($('#course'+i).val()==$('#pref'+k).val()){
+          flag=true;
+          $('#course'+i+'-error').css("display","block");
+          $('#course'+i).css("border-color","#d93025");
+          $('#course'+i).css("border-width","3px");
+          $('#course'+i+'-error').text("You cannot select a course that is already added as a preference.");
+          break;
+        }
+        k+=1;
+      }
+      var j = 1;
+      while (j <= num_least_prefs){
+        if (i!=j && $('#course'+i).val()==$('#course'+j).val()){
+          flag=true;
+          $('#course'+i+'-error').css("display","block");
+          $('#course'+i).css("border-color","#d93025");
+          $('#course'+i).css("border-width","3px");
+          $('#course'+i+'-error').text("A course can be selected at most once");
+          $('#course'+j+'-error').css("display","block");
+          $('#course'+j).css("border-color","#d93025");
+          $('#course'+j).css("border-width","3px");
+          $('#course'+j+'-error').text("A course can be selected at most once");
+        }
+        j+=1;
+      }
+      if(!flag){
+        $('#course'+i+'-error').css("display","none");
+        $('#course'+i).css("border-color",border_color);
+        $('#course'+i).css("border-width",border_width);
+        $('#course'+i+'-error').text("");   
+      }
       i+=1;
     }
+  }
+
+  $('#least-courses').on('change','.least-prefs',function(){
+    $.fn.least_prefs_update();  
   });
 
   /*--/ Form Validation /--*/
