@@ -507,9 +507,16 @@
     $.fn.least_prefs_update();
   });
 
+  /*************************/
   /*--/ Form Validation /--*/
+  /*************************/
 
-  $('form').on('submit',function (e) {
+  $.fn.wait = function(e){
+    e.preventDefault();
+    return false;
+  }
+  // $('form').on('submit',function (e) {
+  $.fn.form_submit = function(e){
     e.preventDefault();
     var failed = false;
 
@@ -638,9 +645,11 @@
       $('#num-pref').css("border-width", "3px");
     }
 
+    var num_pref_invalid = false;
     /* Validating Number of Preferences */
     if (!$.isNumeric($('#num-pref').val()) || $('#num-pref').val() > num_courses || $('#num-pref').val() < 1) {
       failed = true;
+      num_pref_invalid= true;
       $('#num-pref-error').css("display", "block");
       $('#num-pref').css("border-color", "#d93025");
       $('#num-pref').css("border-width", "3px");
@@ -648,10 +657,10 @@
     }
 
     /* Validating Course Preferences */
-    if (!failed) {
+    if (!num_pref_invalid){
       var num_prefs = parseInt($('#num-pref').val(), 10);
       var i = 1;
-      while (i <= num_prefs - 1) {
+      while (i <= num_prefs) {
         var j = i + 1;
         if ($('#pref' + i).val() == "-Select-") {
           failed = true;
@@ -659,6 +668,7 @@
           $('#pref' + i).css("border-color", "#d93025");
           $('#pref' + i).css("border-width", "3px");
           $('#pref' + i + '-error').text("Please select a course");
+          i+=1;
           continue;
         }
         while (j <= num_prefs) {
@@ -679,9 +689,11 @@
       }
     }
 
+    var num_least_pref_invalid = false;
     /* Validating Number of Least Prefs */
     if (!$.isNumeric($('#num-least-pref').val()) || $('#num-least-pref').val() > num_courses || $('#num-least-pref').val() < 0) {
       failed = true;
+      num_least_pref_invalid= true;
       $('#num-least-pref-error').css("display", "block");
       $('#num-least-pref').css("border-color", "#d93025");
       $('#num-least-pref').css("border-width", "3px");
@@ -689,11 +701,11 @@
     }
 
     /* Validating Least Prefs */
-    if (!failed) {
+    if (!num_least_pref_invalid && !num_pref_invalid) {
       var num_prefs = parseInt($('#num-pref').val(), 10);
       var num_least_prefs = parseInt($('#num-least-pref').val(), 10);
       var i = 1;
-      while (i <= num_least_prefs - 1) {
+      while (i <= num_least_prefs) {
         var j = i + 1;
         if ($('#course' + i).val() == "-Select-") {
           failed = true;
@@ -701,6 +713,7 @@
           $('#course' + i).css("border-color", "#d93025");
           $('#course' + i).css("border-width", "3px");
           $('#course' + i + '-error').text("Please select a course");
+          i+=1;
           continue;
         }
         var k = 1;
@@ -734,6 +747,7 @@
     }
 
     if (failed) {
+      $('html, body').animate({scrollTop: $("#main").offset().top}, 2000);
       return false;
     }
     var form_data = {
@@ -775,15 +789,19 @@
     }
     const scriptURL = 'https://script.google.com/macros/s/AKfycbywNlOA24uj2rIdAC_9gIMr--lE9tGs-PyNZhojGQLD7CvbOhpxO0NyP95r-bYepwMQwA/exec';
     $.get(scriptURL, form_data, function(response){
+      $('form').off('submit',$.fn.wait);
       if(response.result=="success"){
-        $('form').unbind();
-        $('form').submit();
+        swal("Success!", "Your response was recorded!", "success").then(value => {$('form').submit();});
       }
       else{
-        window.alert('There was an error in submitting the form. Please try again.');
+        $('form').on('submit',$.fn.form_submit);
+        swal("Error!", "There was an error in submitting the form. Please try again.", "error");
       }
     });
+    $('form').off('submit',$.fn.form_submit);
+    $('form').on('submit',$.fn.wait);
     return false;
-  });
+  };
+  $('form').on('submit',$.fn.form_submit);
 
 })(jQuery);
