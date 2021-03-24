@@ -117,6 +117,27 @@
     }
   });
 
+  /*--/ Email /--*/
+  $('#email').change(function(){
+    if (!$('#email').val() || $('#email').val().substring($('#email').val().length-12)!='@iitgn.ac.in'){
+      $('#email-error').css("display", "block");
+      $('#email').css("border-color", "#d93025");
+      $('#email').css("border-width", "3px");
+      if(!$('#email').val()){
+        $('#email-error').text("This is a required question");
+      }
+      else{
+        $('#email-error').text("Invalid Email Address. You must provide your IITGN email address.");
+      }
+    }
+    else{
+      $('#email-error').css("display", "none");
+      $('#email').css("border-color", border_color);
+      $('#email').css("border-width", border_width);
+      $('#email-error').text("");
+    }
+  });
+
   /*--/ Roll Number /--*/
 
   $('#roll').change(function () {
@@ -504,6 +525,20 @@
       $('#name').change();
     }
 
+    /* Validating Email */
+    if (!$('#email').val() || $('#email').val().substring($('#email').val().length-12)!='@iitgn.ac.in'){
+      failed = true;
+      $('#email-error').css("display", "block");
+      $('#email').css("border-color", "#d93025");
+      $('#email').css("border-width", "3px");
+      if(!$('#email').val()){
+        $('#email-error').text("This is a required question");
+      }
+      else{
+        $('#email-error').text("Invalid Email Address. You must provide your IITGN email address.");
+      }
+    }
+
     /* Validating Roll Number */
     if ($('#roll').val().length != 8 || !$.isNumeric($('#roll').val())) {
       failed = true;
@@ -703,6 +738,7 @@
     }
     var form_data = {
       "Name": $('#name').val(),
+      "Email": $('#email').val(),
       "Roll Number": $('#roll').val(),
       "Programme": $('#program').val(),
       "Year": $('#year').val(),
