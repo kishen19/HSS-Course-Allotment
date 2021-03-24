@@ -254,11 +254,27 @@
   /*--/ Number of Courses /--*/
   $('#num-reg').attr("max", num_courses);
   $('#num-reg').change(function () {
-    if ($('#num-reg').val() >= 1 && $('#num-reg').val() <= num_courses) {
+    if (($('#num-reg').val() >= 1 && $('#num-reg').val() <= num_courses) && ( $('#num-reg').val() <= $('#num-pref').val() )) {
       $('#num-reg-error').css("display", "none");
       $('#num-reg-error').text("");
       $('#num-reg').css("border-color", border_color);
       $('#num-reg').css("border-width", border_width);
+      if($('#num-pref').val() >= 1 && $('#num-pref').val() <= num_courses){
+        $('#num-pref-error').css("display", "none");
+        $('#num-pref-error').text("");
+        $('#num-pref').css("border-color", border_color);
+        $('#num-pref').css("border-width", border_width);
+      }
+    }
+    else if ($('#num-reg').val() > $('#num-pref').val()){
+      $('#num-reg-error').css("display", "block");
+      $('#num-reg-error').text("Number of required courses cannot exceed number of preferences");
+      $('#num-reg').css("border-color", "#d93025");
+      $('#num-reg').css("border-width", "3px");
+      $('#num-pref-error').css("display", "block");
+      $('#num-pref-error').text("Number of required courses cannot exceed number of preferences");
+      $('#num-pref').css("border-color", "#d93025");
+      $('#num-pref').css("border-width", "3px");
     }
     else {
       $('#num-reg-error').css("display", "block");
@@ -282,6 +298,28 @@
       $('#num-pref-error').text("");
       $('#num-pref').css("border-color", border_color);
       $('#num-pref').css("border-width", border_width);
+      if ($('#num-reg').val() > $('#num-pref').val()){
+        $('#num-reg-error').css("display", "block");
+        $('#num-reg-error').text("Number of required courses cannot exceed number of preferences");
+        $('#num-reg').css("border-color", "#d93025");
+        $('#num-reg').css("border-width", "3px");
+        $('#num-pref-error').css("display", "block");
+        $('#num-pref-error').text("Number of required courses cannot exceed number of preferences");
+        $('#num-pref').css("border-color", "#d93025");
+        $('#num-pref').css("border-width", "3px");
+      }
+      else{
+        $('#num-pref-error').css("display", "none");
+        $('#num-pref-error').text("");
+        $('#num-pref').css("border-color", border_color);
+        $('#num-pref').css("border-width", border_width);
+        if($('#num-reg').val() >= 1 && $('#num-reg').val() <= num_courses){
+          $('#num-reg-error').css("display", "none");
+          $('#num-reg-error').text("");
+          $('#num-reg').css("border-color", border_color);
+          $('#num-reg').css("border-width", border_width);
+        }
+      }
       var prefs = $("#preferences .post-box");
       if (prefs.length <= $(this).val()) {
         var v = prefs.length + 1;
@@ -300,7 +338,6 @@
       else {
         var v = parseInt($(this).val(), 10);
         var w = prefs.length;
-        console.log(v, w);
         while (w > v) {
           $("#preference-" + w).remove();
           w -= 1;
@@ -379,7 +416,6 @@
       else {
         var v = parseInt($(this).val(), 10);
         var w = prefs.length;
-        console.log(v, w);
         while (w > v) {
           $("#course-" + w).remove();
           w -= 1;
@@ -451,7 +487,9 @@
   });
 
   /*--/ Form Validation /--*/
-  $('form').submit(function (e) {
+
+  $('form').on('submit',function (e) {
+    e.preventDefault();
     var failed = false;
 
     /* Validating Name */
@@ -553,6 +591,18 @@
       $('#num-reg').css("border-width", "3px");
     }
 
+    if ($('#num-reg').val()>$('#num-pref')){
+      failed= true;
+      $('#num-reg-error').css("display", "block");
+      $('#num-reg-error').text("Number of required courses cannot exceed number of preferences");
+      $('#num-reg').css("border-color", "#d93025");
+      $('#num-reg').css("border-width", "3px");
+      $('#num-pref-error').css("display", "block");
+      $('#num-pref-error').text("Number of required courses cannot exceed number of preferences");
+      $('#num-pref').css("border-color", "#d93025");
+      $('#num-pref').css("border-width", "3px");
+    }
+
     /* Validating Number of Preferences */
     if (!$.isNumeric($('#num-pref').val()) || $('#num-pref').val() > num_courses || $('#num-pref').val() < 1) {
       failed = true;
@@ -649,7 +699,6 @@
     }
 
     if (failed) {
-      e.preventDefault();
       return false;
     }
     var form_data = {
@@ -688,14 +737,17 @@
       form_data['Course #' + i] = $('#course' + i).val();
       i += 1;
     }
-    console.log(form_data);
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbywNlOA24uj2rIdAC_9gIMr--lE9tGs-PyNZhojGQLD7CvbOhpxO0NyP95r-bYepwMQwA/exec'
-    var flag = false;
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbywNlOA24uj2rIdAC_9gIMr--lE9tGs-PyNZhojGQLD7CvbOhpxO0NyP95r-bYepwMQwA/exec';
     $.get(scriptURL, form_data, function(response){
-      console.log('Success!', response);
-      flag = true;
-    })
-    return flag;
+      if(response.result=="success"){
+        $('form').unbind();
+        $('form').submit();
+      }
+      else{
+        window.alert('There was an error in submitting the form. Please try again.');
+      }
+    });
+    return false;
   });
 
 })(jQuery);
