@@ -20,7 +20,7 @@ def insights(courses,students):
     fig = plt.figure(figsize = (15,7))
     max_req = max([s.req for s in students])
     pref_num = [str(i+1) for i in range(numc)]
-    best_pref = [min([s.pref.index(u)+1 for u in s.alloc]) for s in students]
+    best_pref = [min([s.pref_list.index(u)+1 if u in s.pref_list else 50 for u in s.alloc]) for s in students]
     num_studs = [len([j for j in best_pref if j==i]) for i in range(1,numc+1)]
     plt.bar(pref_num,num_studs)
     plt.xlabel("Best Preference Allocated")
@@ -35,7 +35,8 @@ def insights(courses,students):
     num_studs = [0]*numc
     for s in students:
         for j in s.alloc:
-            num_studs[s.pref.index(j)]+=1
+            if j in s.pref_list:
+                num_studs[s.pref_list.index(j)]+=1
     plt.bar(pref_num,num_studs)
     plt.xlabel("Preferences Allocated")
     plt.ylabel("Number of Students")
@@ -49,26 +50,26 @@ def insights(courses,students):
             break
     # Allocated Students Data
     num0 = len([s for s in students if len(s.alloc)==0])
-    num1 = len([s for s in students if s.req==1])
-    num2 = len([s for s in students if s.req==2])
-    num3 = len([s for s in students if s.req==3])
-    num11 = len([s for s in students if s.req==1 and len(s.alloc)==1])
-    num22 = len([s for s in students if s.req==2 and len(s.alloc)==2])
-    num33 = len([s for s in students if s.req==3 and len(s.alloc)==3])
-    num12 = len([s for s in students if s.req==2 and len(s.alloc)==1])
-    num13 = len([s for s in students if s.req==3 and len(s.alloc)==1])
-    num23 = len([s for s in students if s.req==3 and len(s.alloc)==2])
+    # num1 = len([s for s in students if s.req==1])
+    # num2 = len([s for s in students if s.req==2])
+    # num3 = len([s for s in students if s.req==3])
+    # num11 = len([s for s in students if s.req==1 and len(s.alloc)==1])
+    # num22 = len([s for s in students if s.req==2 and len(s.alloc)==2])
+    # num33 = len([s for s in students if s.req==3 and len(s.alloc)==3])
+    # num12 = len([s for s in students if s.req==2 and len(s.alloc)==1])
+    # num13 = len([s for s in students if s.req==3 and len(s.alloc)==1])
+    # num23 = len([s for s in students if s.req==3 and len(s.alloc)==2])
     ## 0 courses
     print("Students who got 0 courses:", num0,"of",nums,"students")
-    ## 1 of 1
-    print("Students who got 1 of 1 courses required:", num11,"of",num1,"students")
-    ## 2 of 2
-    print("Students who got 2 of 2 courses required:", num22,"of",num2,"students")
-    ## 3 of 3
-    print("Students who got 3 of 3 courses required:", num33,"of",num3,"students")
-    ## 1 of 2
-    print("Students who got 1 of 2 courses required:", num12,"of",num2,"students")
-    ## 1 of 3
-    print("Students who got 1 of 3 courses required:", num13,"of",num3,"students")
-    ## 2 of 3
-    print("Students who got 2 of 3 courses required:", num23,"of",num3,"students")
+    # ## 1 of 1
+    # print("Students who got 1 of 1 courses required:", num11,"of",num1,"students")
+    # ## 2 of 2
+    # print("Students who got 2 of 2 courses required:", num22,"of",num2,"students")
+    # ## 3 of 3
+    # print("Students who got 3 of 3 courses required:", num33,"of",num3,"students")
+    # ## 1 of 2
+    # print("Students who got 1 of 2 courses required:", num12,"of",num2,"students")
+    # ## 1 of 3
+    # print("Students who got 1 of 3 courses required:", num13,"of",num3,"students")
+    # ## 2 of 3
+    # print("Students who got 2 of 3 courses required:", num23,"of",num3,"students")
