@@ -1,6 +1,15 @@
 (function ($) {
   "use strict";
 
+  var nav = $('nav');
+  var navHeight = nav.outerHeight();
+
+  $('.navbar-toggler').on('click', function () {
+    if (!$('#mainNav').hasClass('navbar-reduce')) {
+      $('#mainNav').addClass('navbar-reduce');
+    }
+  })
+
   // Preloader
   $(window).on('load', function () {
     if ($('#preloader').length) {
@@ -79,195 +88,24 @@
 
   var border_color = $('#name').css('border-color');
   var border_width = $('#name').css('border-width');
-  var error_color = "#d93025";
-  var error_width = "3px";
   var w = (new Date).getFullYear();
   var programs = ["-Select-", "B.Tech", "M.Tech", "MSc", "MA", "PhD"];
-  // https://beautifytools.com/excel-to-json-converter.php
-  var courses = {
-      "Sheet1": [
-          {
-              "Course Code": "HS 104",
-              "Course Name": "Foundational Sanskrit",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 108",
-              "Course Name": "Japan Studies",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 111",
-              "Course Name": "Urdu Script & Poetry",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 112",
-              "Course Name": "Urdu Poetry Interpretation",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 211",
-              "Course Name": "Exploring India’s Scientific and Technological Heritage",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 223",
-              "Course Name": "Sanskrit Literature",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 305",
-              "Course Name": "Perspectives in Psychology",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 391",
-              "Course Name": "Special Topics in HSS: Music Traditions of India",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 313",
-              "Course Name": "When You Cannot Experiment: Social Science Methods",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 411",
-              "Course Name": "Economic Concepts and Issues in Project Analysis",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 425",
-              "Course Name": "Introduction to Archaeology",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 491-I",
-              "Course Name": "Special Topics in HSS: Indian philosophy through the ages",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 491-II",
-              "Course Name": "Special Topics in HSS: The ‘engineering’ of theatre-making",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 491-III",
-              "Course Name": "Special Topics in HSS: Storytelling for the Digital Era",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 507",
-              "Course Name": "Humanism, Anti-Humanism, and Posthumanism",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 510",
-              "Course Name": "Perspectives on Indian Civilization",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 512",
-              "Course Name": "Political Thought",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 515",
-              "Course Name": "The Politics of the Environment",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 518",
-              "Course Name": "Philosophy, Cognition and Psychoanalysis",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 519",
-              "Course Name": "Linguistic Anthropology",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 610",
-              "Course Name": "A Critical Journey Through Select Thoughts and Theories",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 645",
-              "Course Name": "History of India, 1930-1964",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 691-I",
-              "Course Name": "Special Topics in HSS: Themes in Postcolonialism",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 691-II",
-              "Course Name": "Special topics in HSS: Applied statistics: Multilevel modeling",
-              "Course Cap": "30"
-          },
-          {
-              "Course Code": "IN 304",
-              "Course Name": "Ancient Indian Technology",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "MS 304",
-              "Course Name": "Organizational Behaviour & Human Resource Management (OB & HRM)",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "MS 403",
-              "Course Name": "Engineering Entrepreneurship",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "MS 491",
-              "Course Name": "Special topics in Management: Marketing Analytics",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 691-III",
-              "Course Name": "Special Topics in HSS: Abnormal Psychology",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 327",
-              "Course Name": "Anthropology, Citizenship and Human Rights (Half Sem course, 2nd Half)",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "MS 492",
-              "Course Name": "Special Topics in Management: Finance Management (2 credit course that will run for entire semester, ~2 hours each week)",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "MS 491-I",
-              "Course Name": "Special Topics in Management: Product Management",
-              "Course Cap": "40"
-          }
-      ]
-  };
-  courses = courses["Sheet1"];
-  var course_list = [];
+  var courses = ["HS 104 - Foundational Sanskrit", "HS 108 - Japan Studies", "HS 111 - Urdu Script & Poetry", "HS 112 - Urdu Poetry Interpretation", "HS 211 - Exploring India’s Scientific and Technological Heritage", "HS 223 - Sanskrit Literature", "HS 305 - Perspectives in Psychology", "HS 391 -	Special Topics in HSS: Music Traditions of India", "HS 313 - When You Cannot Experiment: Social Science Methods", "HS 411 - Economic Concepts and Issues in Project Analysis", "HS 425 - Introduction to Archaeology", "HS 491-I - Special Topics in HSS: Indian philosophy through the ages", "HS 491-II - Special Topics in HSS: The ‘engineering’ of theatre-making", "HS 491-III - Special Topics in HSS: Storytelling for the Digital Era", "HS 507 - Humanism, Anti-Humanism, and Posthumanism", "HS 510 - Perspectives on Indian Civilization", "HS 512 - Political Thought", "HS 515 - The Politics of the Environment", "HS 518 - Philosophy, Cognition and Psychoanalysis", "HS 519 - Linguistic Anthropology", "HS 610 - A Critical Journey Through Select Thoughts and Theories", "HS 645 - History of India, 1930-1964", "HS 691-I - Special Topics in HSS: Themes in Postcolonialism", "HS 691-II - Special topics in HSS: Applied statistics: Multilevel modeling", "IN 304 - Ancient Indian Technology", "MS 304 - Organizational Behaviour & Human Resource Management (OB & HRM)", "MS 403 - Engineering Entrepreneurship", "MS 491 - Special topics in Management: Marketing Analytics", "HS 691-III - Special Topics in HSS: Abnormal Psychology", "HS 327 (H) - Anthropology, Citizenship and Human Rights (Half Sem course, 2nd Half)", "MS 492 - Special Topics in Management: Finance Management (2 credit course that will run for entire semester, ~2 hours each week)", "MS 491-I - Special Topics in Management: Product Management"];
   var num_courses = courses.length;
-  for(var i=0;i<num_courses;i++){
-    course_list.push([courses[i]["Course Code"],courses[i]["Course Name"]]);
-  }
-  console.log(course_list);
   var temp = '<div id="preference-1" class="post-box remove-padding">\n<div class="row widget-sidebar form-group">\n<p>\nPreference #1 <sup class="required">*</sup>\n <br>\n </p>\n <select class="form-control prefs" id="pref1" name="pref1" placeholder="Your Answer">\n <option value="-Select-">-Select-</option>\n   </select>\n  <p class="error-msg" id="pref1-error"></p>\n  </div>\n</div>';
+  var temp2 = '<div id="course-1" class="post-box remove-padding">\n<div class="row widget-sidebar form-group">\n<p>\nCourse #1 <sup class="required">*</sup>\n<br>\n</p>\n<select class="form-control least-prefs" id="course1" name="course1" placeholder="Your Answer">\n<option value="-Select-">-Select-</option>\n</select>\n<p class="error-msg" id="course1-error"></p>\n</div>\n</div>';
 
   $.fn.add_options = function (e) {
-    $.each(course_list, function (index, value) {
-      $(e).append("<option value='" + value[0] + "'>" + value[0]+" - "+ value[1] + "</option>");
+    $.each(courses, function (index, value) {
+      $(e).append("<option value='" + value + "'>" + value + "</option>");
     });
   }
-  
+
   /*--/ Name /--*/
   $('#name').change(function () {
     if (!$('#name').val()) {
-      $(this).css("border-color", error_color);
-      $(this).css("border-width", error_width);
+      $(this).css("border-color", "#d93025");
+      $(this).css("border-width", "3px");
       $('#name-error').css("display", "block");
       $('#name-error').text("This is a required question");
     }
@@ -283,8 +121,8 @@
   $('#email').change(function(){
     if (!$('#email').val() || $('#email').val().substring($('#email').val().length-12)!='@iitgn.ac.in'){
       $('#email-error').css("display", "block");
-      $('#email').css("border-color", error_color);
-      $('#email').css("border-width", error_width);
+      $('#email').css("border-color", "#d93025");
+      $('#email').css("border-width", "3px");
       if(!$('#email').val()){
         $('#email-error').text("This is a required question");
       }
@@ -312,8 +150,8 @@
         $('#roll-error').text("");
       }
       else {
-        $(this).css("border-color", error_color);
-        $(this).css("border-width", error_width);
+        $(this).css("border-color", "#d93025");
+        $(this).css("border-width", "3px");
         $('#roll-error').css("display", "block");
         $('#roll-error').text("Invalid Input");
 
@@ -321,14 +159,14 @@
     }
     else {
       if (!$('#roll').val()) {
-        $(this).css("border-color", error_color);
-        $(this).css("border-width", error_width);
+        $(this).css("border-color", "#d93025");
+        $(this).css("border-width", "3px");
         $('#roll-error').css("display", "block");
         $('#roll-error').text("This is a required question");
       }
       else {
-        $(this).css("border-color", error_color);
-        $(this).css("border-width", error_width);
+        $(this).css("border-color", "#d93025");
+        $(this).css("border-width", "3px");
         $('#roll-error').css("display", "block");
         $('#roll-error').text("Invalid Input");
       }
@@ -338,8 +176,8 @@
   /*--/ Programme /--*/
   $('#program').change(function () {
     if ($('#program').val() == "-Select-") {
-      $(this).css("border-color", error_color);
-      $(this).css("border-width", error_width);
+      $(this).css("border-color", "#d93025");
+      $(this).css("border-width", "3px");
       $('#program-error').css("display", "block");
       $('#program-error').text("This is a required question");
     }
@@ -363,8 +201,8 @@
         $('#year-error').text("");
       }
       else {
-        $(this).css("border-color", error_color);
-        $(this).css("border-width", error_width);
+        $(this).css("border-color", "#d93025");
+        $(this).css("border-width", "3px");
         $('#year-error').css("display", "block");
         $('#year-error').text("Invalid Input");
 
@@ -372,33 +210,65 @@
     }
     else {
       if (!$('#year').val()) {
-        $(this).css("border-color", error_color);
-        $(this).css("border-width", error_width);
+        $(this).css("border-color", "#d93025");
+        $(this).css("border-width", "3px");
         $('#year-error').css("display", "block");
         $('#year-error').text("This is a required question");
       }
       else {
-        $(this).css("border-color", error_color);
-        $(this).css("border-width", error_width);
+        $(this).css("border-color", "#d93025");
+        $(this).css("border-width", "3px");
         $('#year-error').css("display", "block");
         $('#year-error').text("Invalid Input");
       }
     }
   });
 
-  /*--/ Unique Code /--*/
-  $('#code').change(function () {
-    if (!$('#code').val()) {
-      $(this).css("border-color", error_color);
-      $(this).css("border-width", error_width);
-      $('#code-error').css("display", "block");
-      $('#code-error').text("This is a required question");
+
+  /*--/ Minors? /--*/
+  $('#minors-none').change(function () {
+    $('#minors-error').css("display", "none");
+    $('#minors-error').text("");
+    if ($(this).is(":checked")) {
+      $('#minors-hss').prop("disabled", true);
+      $('#minors-management').prop("disabled", true);
     }
     else {
-      $(this).css("border-color", border_color);
-      $(this).css("border-width", border_width);
-      $('#code-error').css("display", "none");
-      $('#code-error').text("");
+      $('#minors-hss').prop("disabled", false);
+      $('#minors-management').prop("disabled", false);
+    }
+  });
+
+  $('#minors-hss').change(function () {
+    $('#minors-error').css("display", "none");
+    $('#minors-error').text("");
+    if ($(this).is(":checked")) {
+      $('#minors-none').prop("disabled", true);
+    }
+    else {
+      if ($('#minors-management').is(":checked")) {
+        $('#minors-none').prop("disabled", true);
+      }
+      else {
+        $('#minors-none').prop("disabled", false);
+      }
+
+    }
+  });
+
+  $('#minors-management').change(function () {
+    $('#minors-error').css("display", "none");
+    $('#minors-error').text("");
+    if ($(this).is(":checked")) {
+      $('#minors-none').prop("disabled", true);
+    }
+    else {
+      if ($('#minors-hss').is(":checked")) {
+        $('#minors-none').prop("disabled", true);
+      }
+      else {
+        $('#minors-none').prop("disabled", false);
+      }
     }
   });
 
@@ -420,18 +290,18 @@
     else if ($('#num-reg').val() > $('#num-pref').val()){
       $('#num-reg-error').css("display", "block");
       $('#num-reg-error').text("Number of required courses cannot exceed number of preferences");
-      $('#num-reg').css("border-color", error_color);
-      $('#num-reg').css("border-width", error_width);
+      $('#num-reg').css("border-color", "#d93025");
+      $('#num-reg').css("border-width", "3px");
       $('#num-pref-error').css("display", "block");
       $('#num-pref-error').text("Number of required courses cannot exceed number of preferences");
-      $('#num-pref').css("border-color", error_color);
-      $('#num-pref').css("border-width", error_width);
+      $('#num-pref').css("border-color", "#d93025");
+      $('#num-pref').css("border-width", "3px");
     }
     else {
       $('#num-reg-error').css("display", "block");
       $('#num-reg-error').text("Value must be between 1 and " + num_courses);
-      $('#num-reg').css("border-color", error_color);
-      $('#num-reg').css("border-width", error_width);
+      $('#num-reg').css("border-color", "#d93025");
+      $('#num-reg').css("border-width", "3px");
     }
   });
 
@@ -452,12 +322,12 @@
       if ($('#num-reg').val() > $('#num-pref').val()){
         $('#num-reg-error').css("display", "block");
         $('#num-reg-error').text("Number of required courses cannot exceed number of preferences");
-        $('#num-reg').css("border-color", error_color);
-        $('#num-reg').css("border-width", error_width);
+        $('#num-reg').css("border-color", "#d93025");
+        $('#num-reg').css("border-width", "3px");
         $('#num-pref-error').css("display", "block");
         $('#num-pref-error').text("Number of required courses cannot exceed number of preferences");
-        $('#num-pref').css("border-color", error_color);
-        $('#num-pref').css("border-width", error_width);
+        $('#num-pref').css("border-color", "#d93025");
+        $('#num-pref').css("border-width", "3px");
       }
       else{
         $('#num-pref-error').css("display", "none");
@@ -498,8 +368,8 @@
     else {
       $('#num-pref-error').css("display", "block");
       $('#num-pref-error').text("Number of course preferences must be between 1 and " + num_courses);
-      $('#num-pref').css("border-color", error_color);
-      $('#num-pref').css("border-width", error_width);
+      $('#num-pref').css("border-color", "#d93025");
+      $('#num-pref').css("border-width", "3px");
     }
   });
 
@@ -511,8 +381,8 @@
       if ($('#pref' + i).val() == "-Select-") {
         flag = true;
         $('#pref' + i + '-error').css("display", "block");
-        $('#pref' + i).css("border-color", error_color);
-        $('#pref' + i).css("border-width", error_width);
+        $('#pref' + i).css("border-color", "#d93025");
+        $('#pref' + i).css("border-width", "3px");
         $('#pref' + i + '-error').text("Please select a course");
         i += 1;
         continue;
@@ -522,8 +392,8 @@
         if (i != j && $('#pref' + i).val() == $('#pref' + j).val()) {
           flag = true;
           $('#pref' + i + '-error').css("display", "block");
-          $('#pref' + i).css("border-color", error_color);
-          $('#pref' + i).css("border-width", error_width);
+          $('#pref' + i).css("border-color", "#d93025");
+          $('#pref' + i).css("border-width", "3px");
           $('#pref' + i + '-error').text("A course can be selected at most once as a preference");
         }
         j += 1;
@@ -536,6 +406,105 @@
       }
       i += 1;
     }
+    $.fn.least_prefs_update();
+  });
+
+  /*--/ Least Preferences /--*/
+
+  $('#num-least-pref').attr("max", num_courses);
+
+  $('#num-least-pref').change(function () {
+    if ($('#num-least-pref').val() >= 0 && $('#num-least-pref').val() <= num_courses) {
+      $('#num-least-pref-error').css("display", "none");
+      $('#num-least-pref-error').text("");
+      $('#num-least-pref').css("border-color", border_color);
+      $('#num-least-pref').css("border-width", border_width);
+      var prefs = $("#least-courses .post-box");
+      if (prefs.length <= $(this).val()) {
+        var v = prefs.length + 1;
+        while (v <= $(this).val()) {
+          $("#least-courses").append(temp2);
+          $("#least-courses .post-box:last").attr("id", "course-" + v);
+          $("#course-" + v + " p:first").html("Course #" + v + '<sup class="required">*</sup>');
+          $("#course-" + v + " .form-control").attr("id", "course" + v);
+          $("#course-" + v + " .form-control").attr("name", "course" + v);
+          $("#course-" + v + " .error-msg").attr("id", "course" + v + "-error");
+          $.fn.add_options('#course' + v);
+          $('#course' + v).select2();
+          v = v + 1;
+        };
+      }
+      else {
+        var v = parseInt($(this).val(), 10);
+        var w = prefs.length;
+        while (w > v) {
+          $("#course-" + w).remove();
+          w -= 1;
+        };
+      }
+    }
+    else {
+      $('#num-least-pref-error').css("display", "block");
+      $('#num-least-pref-error').text("Value must be between 0 and " + num_courses);
+      $('#num-least-pref').css("border-color", "#d93025");
+      $('#num-least-pref').css("border-width", "3px");
+    }
+  });
+
+  $.fn.least_prefs_update = function () {
+    var num_prefs = parseInt($('#num-pref').val(), 10);
+    var num_least_prefs = parseInt($('#num-least-pref').val(), 10);
+    var i = 1;
+    while (i <= num_least_prefs) {
+      var flag = false;
+      if ($('#course' + i).val() == "-Select-") {
+        flag = true;
+        $('#course' + i + '-error').css("display", "block");
+        $('#course' + i).css("border-color", "#d93025");
+        $('#course' + i).css("border-width", "3px");
+        $('#course' + i + '-error').text("Please select a course");
+        i += 1;
+        continue;
+      }
+      var k = 1;
+      while (k <= num_prefs) {
+        if ($('#course' + i).val() == $('#pref' + k).val()) {
+          flag = true;
+          $('#course' + i + '-error').css("display", "block");
+          $('#course' + i).css("border-color", "#d93025");
+          $('#course' + i).css("border-width", "3px");
+          $('#course' + i + '-error').text("You cannot select a course that is already added as a preference.");
+          break;
+        }
+        k += 1;
+      }
+      var j = 1;
+      while (j <= num_least_prefs) {
+        if (i != j && $('#course' + i).val() == $('#course' + j).val()) {
+          flag = true;
+          $('#course' + i + '-error').css("display", "block");
+          $('#course' + i).css("border-color", "#d93025");
+          $('#course' + i).css("border-width", "3px");
+          $('#course' + i + '-error').text("A course can be selected at most once");
+          $('#course' + j + '-error').css("display", "block");
+          $('#course' + j).css("border-color", "#d93025");
+          $('#course' + j).css("border-width", "3px");
+          $('#course' + j + '-error').text("A course can be selected at most once");
+        }
+        j += 1;
+      }
+      if (!flag) {
+        $('#course' + i + '-error').css("display", "none");
+        $('#course' + i).css("border-color", border_color);
+        $('#course' + i).css("border-width", border_width);
+        $('#course' + i + '-error').text("");
+      }
+      i += 1;
+    }
+  }
+
+  $('#least-courses').on('change', '.least-prefs', function () {
+    $.fn.least_prefs_update();
   });
 
   /*************************/
@@ -556,16 +525,19 @@
       failed = true;
       $('#name-error').css("display", "block");
       $('#name-error').text("This is a required question");
-      $('#name').css("border-color", error_color);
-      $('#name').css("border-width", error_width);
+      $('#name').css("border-color", "#d93025");
+      $('#name').css("border-width", "3px");
+    }
+    else {
+      $('#name').change();
     }
 
     /* Validating Email */
     if (!$('#email').val() || $('#email').val().substring($('#email').val().length-12)!='@iitgn.ac.in'){
       failed = true;
       $('#email-error').css("display", "block");
-      $('#email').css("border-color", error_color);
-      $('#email').css("border-width", error_width);
+      $('#email').css("border-color", "#d93025");
+      $('#email').css("border-width", "3px");
       if(!$('#email').val()){
         $('#email-error').text("This is a required question");
       }
@@ -578,8 +550,8 @@
     if ($('#roll').val().length != 8 || !$.isNumeric($('#roll').val())) {
       failed = true;
       $('#roll-error').css("display", "block");
-      $('#roll').css("border-color", error_color);
-      $('#roll').css("border-width", error_width);
+      $('#roll').css("border-color", "#d93025");
+      $('#roll').css("border-width", "3px");
       if (!$('#roll').val()) {
         $('#roll-error').text("This is a required question");
       }
@@ -596,15 +568,15 @@
       failed = true;
       $('#program-error').css("display", "block");
       $('#program-error').text("This is a required question");
-      $('#program').css("border-color", error_color);
-      $('#program').css("border-width", error_width);
+      $('#program').css("border-color", "#d93025");
+      $('#program').css("border-width", "3px");
     }
     else if ($.inArray($('#program').val(), programs) == -1) {
       failed = true;
       $('#program-error').css("display", "block");
       $('#program-error').text("Invaid Input");
-      $('#program').css("border-color", error_color);
-      $('#program').css("border-width", error_width);
+      $('#program').css("border-color", "#d93025");
+      $('#program').css("border-width", "3px");
     }
     else {
       $('#program-error').css("display", "none");
@@ -621,8 +593,8 @@
     if (!$.isNumeric($('#year').val()) || w - 15 > $('#year').val() || $('#year').val() > w) {
       failed = true;
       $('#year-error').css("display", "block");
-      $('#year').css("border-color", error_color);
-      $('#year').css("border-width", error_width);
+      $('#year').css("border-color", "#d93025");
+      $('#year').css("border-width", "3px");
       if (!$('#year').val()) {
         $('#year-error').text("This is a required question");
       }
@@ -631,44 +603,56 @@
       }
     }
 
-    /* Unique Code */
-    if (!$('#code').val()) {
+    /* Validating Minors */
+    if ($('#minors-none').is(':checked') && ($('#minors-hss').is(":checked") || $('#minors-management').is(":checked"))) {
       failed = true;
-      $('#code-error').css("display", "block");
-      $('#code-error').text("This is a required question");
-      $('#code').css("border-color", error_color);
-      $('#code').css("border-width", error_width);
+      $('#minors-none').prop('checked', false);
+      $('#minors-hss').prop('checked', false);
+      $('#minors-management').prop('checked', false);
+      $('#minors-none').prop('disabled', false);
+      $('#minors-hss').prop('disabled', false);
+      $('#minors-management').prop('disabled', false);
+      $('#minors-error').css("display", "block");
+      $('#minors-error').text("Invalid Input");
+    }
+    else if (!$('#minors-none').is(':checked') && !$('#minors-hss').is(":checked") && !$('#minors-management').is(":checked")) {
+      failed = true;
+      $('#minors-none').prop('disabled', false);
+      $('#minors-hss').prop('disabled', false);
+      $('#minors-management').prop('disabled', false);
+      $('#minors-error').css("display", "block");
+      $('#minors-error').text("This is a required question");
     }
 
     /* Number of Courses Required */
-    if ((!$.isNumeric($('#num-reg').val())) || ($('#num-reg').val() > num_courses) || ($('#num-reg').val() < 1)){
+    if (!$.isNumeric($('#num-reg').val()) || $('#num-reg').val() > num_courses || $('#num-reg').val() < 1) {
       failed = true;
       $('#num-reg-error').css("display", "block");
       $('#num-reg-error').text("Value must be between 1 and " + num_courses);
-      $('#num-reg').css("border-color", error_color);
-      $('#num-reg').css("border-width", error_width);
+      $('#num-reg').css("border-color", "#d93025");
+      $('#num-reg').css("border-width", "3px");
     }
 
     if ($('#num-reg').val()>$('#num-pref')){
       failed= true;
       $('#num-reg-error').css("display", "block");
       $('#num-reg-error').text("Number of required courses cannot exceed number of preferences");
-      $('#num-reg').css("border-color", error_color);
-      $('#num-reg').css("border-width", error_width);
+      $('#num-reg').css("border-color", "#d93025");
+      $('#num-reg').css("border-width", "3px");
       $('#num-pref-error').css("display", "block");
       $('#num-pref-error').text("Number of required courses cannot exceed number of preferences");
-      $('#num-pref').css("border-color", error_color);
-      $('#num-pref').css("border-width", error_width);
+      $('#num-pref').css("border-color", "#d93025");
+      $('#num-pref').css("border-width", "3px");
     }
 
     var num_pref_invalid = false;
     /* Validating Number of Preferences */
-    if ((!$.isNumeric($('#num-pref').val())) || ($('#num-pref').val() > num_courses) || ($('#num-pref').val() < 1)){
+    if (!$.isNumeric($('#num-pref').val()) || $('#num-pref').val() > num_courses || $('#num-pref').val() < 1) {
       failed = true;
       num_pref_invalid= true;
       $('#num-pref-error').css("display", "block");
-      $('#num-pref').css("border-color", error_color);
-      $('#num-pref').css("border-width", error_width);
+      $('#num-pref').css("border-color", "#d93025");
+      $('#num-pref').css("border-width", "3px");
       $('#num-pref-error').text("Number of course preferences must be between 1 and " + num_courses);
     }
 
@@ -681,8 +665,8 @@
         if ($('#pref' + i).val() == "-Select-") {
           failed = true;
           $('#pref' + i + '-error').css("display", "block");
-          $('#pref' + i).css("border-color", error_color);
-          $('#pref' + i).css("border-width", error_width);
+          $('#pref' + i).css("border-color", "#d93025");
+          $('#pref' + i).css("border-width", "3px");
           $('#pref' + i + '-error').text("Please select a course");
           i+=1;
           continue;
@@ -691,13 +675,70 @@
           if ($('#pref' + i).val() == $('#pref' + j).val()) {
             failed = true;
             $('#pref' + i + '-error').css("display", "block");
-            $('#pref' + i).css("border-color", error_color);
-            $('#pref' + i).css("border-width", error_width);
+            $('#pref' + i).css("border-color", "#d93025");
+            $('#pref' + i).css("border-width", "3px");
             $('#pref' + i + '-error').text("A course can be selected at most once as a preference");
             $('#pref' + j + '-error').css("display", "block");
-            $('#pref' + j).css("border-color", error_color);
-            $('#pref' + j).css("border-width", error_width);
+            $('#pref' + j).css("border-color", "#d93025");
+            $('#pref' + j).css("border-width", "3px");
             $('#pref' + j + '-error').text("A course can be selected at most once as a preference");
+          }
+          j += 1;
+        }
+        i += 1;
+      }
+    }
+
+    var num_least_pref_invalid = false;
+    /* Validating Number of Least Prefs */
+    if (!$.isNumeric($('#num-least-pref').val()) || $('#num-least-pref').val() > num_courses || $('#num-least-pref').val() < 0) {
+      failed = true;
+      num_least_pref_invalid= true;
+      $('#num-least-pref-error').css("display", "block");
+      $('#num-least-pref').css("border-color", "#d93025");
+      $('#num-least-pref').css("border-width", "3px");
+      $('#num-least-pref-error').text("Value must be between 0 and " + num_courses);
+    }
+
+    /* Validating Least Prefs */
+    if (!num_least_pref_invalid && !num_pref_invalid) {
+      var num_prefs = parseInt($('#num-pref').val(), 10);
+      var num_least_prefs = parseInt($('#num-least-pref').val(), 10);
+      var i = 1;
+      while (i <= num_least_prefs) {
+        var j = i + 1;
+        if ($('#course' + i).val() == "-Select-") {
+          failed = true;
+          $('#course' + i + '-error').css("display", "block");
+          $('#course' + i).css("border-color", "#d93025");
+          $('#course' + i).css("border-width", "3px");
+          $('#course' + i + '-error').text("Please select a course");
+          i+=1;
+          continue;
+        }
+        var k = 1;
+        while (k <= num_prefs) {
+          if ($('#course' + i).val() == $('#pref' + k).val()) {
+            failed = true;
+            $('#course' + i + '-error').css("display", "block");
+            $('#course' + i).css("border-color", "#d93025");
+            $('#course' + i).css("border-width", "3px");
+            $('#course' + i + '-error').text("You cannot select a course that is already added as a preference.");
+            break;
+          }
+          k += 1;
+        }
+        while (j <= num_least_prefs) {
+          if ($('#course' + i).val() == $('#course' + j).val()) {
+            failed = true;
+            $('#course' + i + '-error').css("display", "block");
+            $('#course' + i).css("border-color", "#d93025");
+            $('#course' + i).css("border-width", "3px");
+            $('#course' + i + '-error').text("A course can be selected at most once");
+            $('#course' + j + '-error').css("display", "block");
+            $('#course' + j).css("border-color", "#d93025");
+            $('#course' + j).css("border-width", "3px");
+            $('#course' + j + '-error').text("A course can be selected at most once");
           }
           j += 1;
         }
@@ -715,18 +756,38 @@
       "Roll Number": $('#roll').val(),
       "Programme": $('#program').val(),
       "Year": $('#year').val(),
-      "Unique Code":$('#code').val(),
       "Number of courses to register": $('#num-reg').val(),
       "Number of Preferences": $('#num-pref').val(),
+      "Number of least preferences": $('#num-least-pref').val(),
+      "Other Info": $('#other-info').val(),
     };
+    if ($('#minors-none').is(':checked')) {
+      form_data['Minors'] = 'None';
+    }
+    else {
+      var s1 = '', s2 = '';
+      if ($('#minors-hss').is(':checked')) {
+        s1 = 'HSS, ';
+      }
+      if ($('#minors-management').is(':checked')) {
+        s2 = 'Management';
+      }
+      form_data['Minors'] = s1 + s2;
+    }
+
     var i = 1;
     var num_prefs = $('#num-pref').val();
+    var num_least_prefs = $('#num-least-pref').val();
     while (i <= num_prefs) {
       form_data['Preference #' + i] = $('#pref' + i).val();
       i += 1;
     }
-
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbydsm9liXMOtru9hjsGcGeVe-3fR82M7VkkV7RVUV9j06vwMxXSDQTDnVvfrv75ukmqMQ/exec';
+    i = 1;
+    while (i <= num_least_prefs) {
+      form_data['Course #' + i] = $('#course' + i).val();
+      i += 1;
+    }
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbywNlOA24uj2rIdAC_9gIMr--lE9tGs-PyNZhojGQLD7CvbOhpxO0NyP95r-bYepwMQwA/exec';
     $.get(scriptURL, form_data, function(response){
       $('form').off('submit',$.fn.wait);
       if(response.result=="success"){
