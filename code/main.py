@@ -3,6 +3,7 @@ from course import Course
 from student import Student
 from iaf import IAF
 from insights import insights
+from validation import validation
 
 def get_courseid(s):
     s1 = s[:6]
@@ -28,16 +29,13 @@ def get_input():
                 i["Name"],
                 min(int(i["Number of courses to register"]),int(i["Number of Preferences"])),
                 int(i["Number of Preferences"]),
-                [get_courseid(i["Preference #"+str(j+1)].strip()) for j in range(int(i["Number of Preferences"]))],
-                int(i["Number of least preferences"]),
-                [get_courseid(i["Course #"+str(j+1)].strip()) for j in range(int(i["Number of least preferences"]))]
+                [get_courseid(i["Preference #"+str(j+1)].strip()) for j in range(int(i["Number of Preferences"]))]
             ]
-            students_data[i["Roll Number"]][7],students_data[i["Roll Number"]][9] = students_data[i["Roll Number"]][7],students_data[i["Roll Number"]][9]
-    students = [Student(roll_num= students_data[i][3], name= students_data[i][4], programme= students_data[i][1], minors= students_data[i][2], req= students_data[i][5], num_pref= students_data[i][6], pref_list= students_data[i][7], num_excl= students_data[i][8], excl_list= students_data[i][9]) for i in students_data]
+    students = [Student(roll_num= students_data[i][3], name= students_data[i][4], programme= students_data[i][1], minors= students_data[i][2], req= students_data[i][5], num_pref= students_data[i][6], pref_list= students_data[i][7]) for i in students_data]
     new_students = []
     for i in students_data:
         for j in range(5):
-            new_students.append(Student(roll_num= int(str(students_data[i][3])+str(j)), name= students_data[i][4], programme= students_data[i][1], minors= students_data[i][2], req= students_data[i][5], num_pref= students_data[i][6], pref_list= students_data[i][7], num_excl= students_data[i][8], excl_list= students_data[i][9]))
+            new_students.append(Student(roll_num= int(str(students_data[i][3])+str(j)), name= students_data[i][4], programme= students_data[i][1], minors= students_data[i][2], req= students_data[i][5], num_pref= students_data[i][6], pref_list= students_data[i][7]))
     return courses, new_students
 
 def write_output(courses,students):
@@ -53,9 +51,10 @@ def main():
     solver = IAF(courses,students)
     solver.run()
     write_output(courses,students)
-    insights(courses,students)
-    print("Number of Random Allocations:",solver.random_allocations)
+    # insights(courses,students)
     print("Total Number of Allocations:",solver.total_allocations)
+    print("Total Number of Required Allocations:",solver.total_required_allocations)
+    validation(students,courses)
 
 
 if __name__=='__main__':
