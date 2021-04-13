@@ -14,8 +14,8 @@ def insights(courses,students):
     plt.xlabel("Number of Required Courses")
     plt.ylabel("Number of Students")
     plt.title("Number of Required Courses v/s Number of Students")
-    plt.savefig("../insights/req_courses_vs_students_upscaled_5.png")
-    # plt.show()
+    # plt.savefig("../insights/req_courses_vs_students_upscaled_5.png")
+    plt.show()
 
 
     # Preference vs Students - One (best) course only
@@ -28,8 +28,8 @@ def insights(courses,students):
     plt.xlabel("Best Preference Allocated")
     plt.ylabel("Number of Students")
     plt.title("Best Preference Allocated v/s Number of Students")
-    plt.savefig("../insights/best_pref_vs_no_of_students_upscaled_5.png")
-    # plt.show()
+    # plt.savefig("../insights/best_pref_vs_no_of_students_upscaled_5.png")
+    plt.show()
 
     # Preference vs Students - One (best) course only
     fig = plt.figure(figsize = (15,7))
@@ -44,8 +44,8 @@ def insights(courses,students):
     plt.xlabel("Preferences Allocated")
     plt.ylabel("Number of Students")
     plt.title("Preferences Allocated v/s Number of Students")
-    plt.savefig("../insights/pref_allocated_vs_no_of_students_upscaled_5.png")
-    # plt.show()
+    # plt.savefig("../insights/pref_allocated_vs_no_of_students_upscaled_5.png")
+    plt.show()
 
     # Max Preference Allocated
     for j in range(numc-1,-1,-1):

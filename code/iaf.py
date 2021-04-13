@@ -14,6 +14,7 @@ class IAF:
         self.S = students
         self.max_req = max([s.req for s in self.S])
         self.total_allocations = 0
+        self.total_required_allocations = sum([s.req for s in self.S])
 
     def run(self):
         for req_num in tqdm(range(1,self.max_req+1)):
@@ -23,32 +24,6 @@ class IAF:
                 self.allocate(curr_C,curr_S,req_num)
                 curr_C = [c for c in curr_C if c.rem>0]
                 curr_S = [s for s in curr_S if s.latest_itr<req_num and check(s,curr_C)]
-            # Randomly allocate courses to remaining students
-            shuffle(curr_C)
-            curr_S = [s for s in self.S if s.req >= req_num and s.latest_itr < req_num]
-
-            for c in curr_C:
-                for s in curr_S:
-                    if (s.latest_itr<req_num) and (c.code not in s.excl_list) and (c.code not in s.alloc):
-                        c.requests.append(s)
-                if len(c.requests) <= c.rem:
-                    for s in c.requests:
-                        s.alloc.append(c.code)
-                        c.students.append(s.roll)
-                        s.latest_itr = req_num
-                        self.random_allocations += 1
-                        self.total_allocations += 1
-                    c.rem-=len(c.requests)
-                else:
-                    w = self.break_ties(c.requests,c.rem)
-                    for s in w:
-                        s.alloc.append(c.code)
-                        c.students.append(s.roll)
-                        s.latest_itr = req_num
-                        self.random_allocations += 1
-                        self.total_allocations += 1
-                    c.rem = 0
-                c.requests = []
 
     def allocate(self,C,S,req_num):
         curr_cc = {c.code for c in C}
