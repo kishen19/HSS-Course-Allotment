@@ -13,6 +13,7 @@ class IAF:
         self.c2C = {c.code:c for c in self.C}
         self.S = students
         self.max_req = max([s.req for s in self.S])
+        self.total_allocations = 0
 
     def run(self):
         for req_num in tqdm(range(1,self.max_req+1)):
@@ -35,6 +36,8 @@ class IAF:
                         s.alloc.append(c.code)
                         c.students.append(s.roll)
                         s.latest_itr = req_num
+                        self.random_allocations += 1
+                        self.total_allocations += 1
                     c.rem-=len(c.requests)
                 else:
                     w = self.break_ties(c.requests,c.rem)
@@ -42,6 +45,8 @@ class IAF:
                         s.alloc.append(c.code)
                         c.students.append(s.roll)
                         s.latest_itr = req_num
+                        self.random_allocations += 1
+                        self.total_allocations += 1
                     c.rem = 0
                 c.requests = []
 
@@ -58,6 +63,7 @@ class IAF:
                     s.alloc.append(c.code)
                     c.students.append(s.roll)
                     s.latest_itr = req_num
+                    self.total_allocations += 1
                 c.rem-=len(c.requests)
             else:
                 w = self.break_ties(c.requests,c.rem)
@@ -65,6 +71,7 @@ class IAF:
                     s.alloc.append(c.code)
                     c.students.append(s.roll)
                     s.latest_itr = req_num
+                    self.total_allocations += 1
                 c.rem = 0
             c.requests = []
 

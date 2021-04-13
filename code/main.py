@@ -15,7 +15,7 @@ def get_courseid(s):
 
 def get_input():
     cours = pd.read_excel("./courses_data/courses_2020_21.xlsx")
-    courses = [Course(i["Course Code"],i["Course Name"],int(i["Course Cap"])//3) for ind,i in cours.iterrows()]
+    courses = [Course(i["Course Code"],i["Course Name"],int(i["Course Cap"])) for ind,i in cours.iterrows()]
     studs = pd.read_excel("./students_data/mock_data.xlsx")
     students_data = {}
     for ind,i in studs.iterrows():
@@ -34,7 +34,11 @@ def get_input():
             ]
             students_data[i["Roll Number"]][7],students_data[i["Roll Number"]][9] = students_data[i["Roll Number"]][7],students_data[i["Roll Number"]][9]
     students = [Student(roll_num= students_data[i][3], name= students_data[i][4], programme= students_data[i][1], minors= students_data[i][2], req= students_data[i][5], num_pref= students_data[i][6], pref_list= students_data[i][7], num_excl= students_data[i][8], excl_list= students_data[i][9]) for i in students_data]
-    return courses, students
+    new_students = []
+    for i in students_data:
+        for j in range(5):
+            new_students.append(Student(roll_num= int(str(students_data[i][3])+str(j)), name= students_data[i][4], programme= students_data[i][1], minors= students_data[i][2], req= students_data[i][5], num_pref= students_data[i][6], pref_list= students_data[i][7], num_excl= students_data[i][8], excl_list= students_data[i][9]))
+    return courses, new_students
 
 def write_output(courses,students):
     max_req = max([s.req for s in students])
@@ -50,6 +54,8 @@ def main():
     solver.run()
     write_output(courses,students)
     insights(courses,students)
+    print("Number of Random Allocations:",solver.random_allocations)
+    print("Total Number of Allocations:",solver.total_allocations)
 
 
 if __name__=='__main__':
