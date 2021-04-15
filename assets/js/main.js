@@ -293,7 +293,7 @@
   for(var i=0;i<num_courses;i++){
     course_list.push([courses[i]["Course Code"],courses[i]["Course Title"]]);
   }
-  console.log(course_list);
+  var max_reg = 2;
   var temp = '<div id="preference-1" class="post-box remove-padding">\n<div class="row widget-sidebar form-group">\n<p>\nPreference #1 <sup class="required">*</sup>\n <br>\n </p>\n <select class="form-control prefs" id="pref1" name="pref1" placeholder="Your Answer">\n <option value="-Select-">-Select-</option>\n   </select>\n  <p class="error-msg" id="pref1-error"></p>\n  </div>\n</div>';
 
   $.fn.add_options = function (e) {
@@ -442,9 +442,9 @@
   });
 
   /*--/ Number of Courses /--*/
-  $('#num-reg').attr("max", num_courses);
+  $('#num-reg').attr("max", max_reg);
   $('#num-reg').change(function () {
-    if (($('#num-reg').val() >= 1 && $('#num-reg').val() <= num_courses) && ( $('#num-reg').val() <= $('#num-pref').val() )) {
+    if (($('#num-reg').val() >= 1 && $('#num-reg').val() <= max_reg) && ( $('#num-reg').val() <= $('#num-pref').val() )) {
       $('#num-reg-error').css("display", "none");
       $('#num-reg-error').text("");
       $('#num-reg').css("border-color", border_color);
@@ -468,7 +468,7 @@
     }
     else {
       $('#num-reg-error').css("display", "block");
-      $('#num-reg-error').text("Value must be between 1 and " + num_courses);
+      $('#num-reg-error').text("Value must be between 1 and " + max_reg);
       $('#num-reg').css("border-color", error_color);
       $('#num-reg').css("border-width", error_width);
     }
@@ -503,7 +503,7 @@
         $('#num-pref-error').text("");
         $('#num-pref').css("border-color", border_color);
         $('#num-pref').css("border-width", border_width);
-        if($('#num-reg').val() >= 1 && $('#num-reg').val() <= num_courses){
+        if($('#num-reg').val() >= 1 && $('#num-reg').val() <= max_reg){
           $('#num-reg-error').css("display", "none");
           $('#num-reg-error').text("");
           $('#num-reg').css("border-color", border_color);
@@ -680,10 +680,10 @@
     }
 
     /* Number of Courses Required */
-    if ((!$.isNumeric($('#num-reg').val())) || ($('#num-reg').val() > num_courses) || ($('#num-reg').val() < 1)){
+    if ((!$.isNumeric($('#num-reg').val())) || ($('#num-reg').val() > max_reg) || ($('#num-reg').val() < 1)){
       failed = true;
       $('#num-reg-error').css("display", "block");
-      $('#num-reg-error').text("Value must be between 1 and " + num_courses);
+      $('#num-reg-error').text("Value must be between 1 and " + max_reg);
       $('#num-reg').css("border-color", error_color);
       $('#num-reg').css("border-width", error_width);
     }
