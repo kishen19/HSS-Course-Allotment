@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <link rel="shortcut icon" type="image/jpg" href="assets/img/iitgn_logo-1.png"/>
-  <title>HSS Pre-Registration</title>
+  <title>HSS Course Allotment</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -33,7 +33,7 @@
     <div class="intro-content display-table">
       <div class="table-cell">
         <div class="container">
-          <h1 class="title-a" style="color: white;font-family: 'Raleway';">HSS Course Allocation</h1>
+          <h1 class="title-a" style="color: white;font-family: 'Raleway';">HSS Course Allotment</h1>
           <div class="line-mf mb-5" style="background-color: white;"></div>
           <h5 class="subtitle-a" style="color: white;"></h5>
         </div>
@@ -52,8 +52,8 @@
 
             <div class="post-box remove-padding">
               <div class="row widget-sidebar">
-                <h4 class="sidebar-title" style="font-family: Roboto;">Pre-Registration for HSS Courses - Sem I, 2021-22</h4>
-                <p>Please use this form to submit your preferences for HSS course allocations. Please note that all the fields are mandatory. You must enter the number of HSS courses you wish to take in Semester I, 2021-22. In addition, you must provide a list of preferred HSS courses from which the allocation is to be made. We strongly encourage you to indicate as many preferences as possible. This will maximize the chances of allocation. We also request you to please check the data once before submitting the form.<br><br><span class="required">* Required</span></p>
+                <h4 class="sidebar-title" style="font-family: Roboto;">Mock Pre-Registration for HSS Courses</h4>
+                <p>Fill in your course preference order for HSS courses. <br>Make sure to enter as many preferences as possible. More the number of preferences, greater is the possibility to get a preferred course.<br><br><span class="required">* Required</span></p>
               </div>
               <div class="col-md-2"></div>
             </div>
@@ -126,15 +126,28 @@
 
               <div class="post-box remove-padding">
                 <div class="row widget-sidebar form-group">
-                  <p class="w-100">
-                    Unique Code <sup class="required">*</sup>
+                  <p>
+                    Minors? <sup class="required">*</sup>
                     <br>
-                    <span class="label-description">Enter the unique code that was shared with you by email.</span>
+                    <span class="label-description">Are you pursuing a Minor in HSS or Management?
+                    </span>
                     <br>
                   </p>
-                  <br>
-                  <input type="text" class="form-control" id="code" name="code" placeholder="Your Answer" />
-                  <p class="error-msg" id="code-error"></p>
+                  <div class="w-100">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="hss" id="minors-hss"/>
+                      <label class="form-check-label" for="minors-hss">HSS</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="management" id="minors-management"/>
+                      <label class="form-check-label" for="minors-management">Management</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="none" id="minors-none"/>
+                      <label class="form-check-label" for="minors-none">None</label>
+                    </div>
+                  </div>
+                  <p class="error-msg" id="minors-error"></p>
                 </div>
               </div>
 
@@ -143,7 +156,7 @@
                   <p class="w-100">
                     Number of Courses Required <sup class="required">*</sup>
                     <br>
-                    <span class="label-description">Enter number of courses you wish to register. (At most <b>2</b>)</span>
+                    <span class="label-description">Enter number of courses you wish to be allocated.</span>
                     <br>
                   </p>
                   <br>
@@ -157,7 +170,7 @@
                   <p class="w-100">
                     Number of Preferences <sup class="required">*</sup>
                     <br>
-                    <span class="label-description">Enter the number of course preferences you wish to provide.<br><b>Make sure to enter as many preferences as possible for better chances of allocation.</b></span>
+                    <span class="label-description">Enter the number of course preferences you wish to provide.</span>
                     <br>
                   </p>
                   <br>
@@ -181,6 +194,34 @@
                 </div>
               </div>
 
+              <div class="post-box remove-padding">
+                <div class="row widget-sidebar form-group">
+                  <p class='w-100'>
+                    Number of Courses you wish <b>not</b> to be allocated <sup class="required">*</sup>
+                    <br>
+                    <span class="label-description">Please enter the number of courses that you wish not to be allocated. These could be courses that you did previously or courses that you really don't want to take up.</span>
+                    <br>
+                  </p>
+                  <input type="number" min="0" class="form-control" id="num-least-pref" name="num-least-pref" value = "0" style="width: 15%;"/>
+                  <p class="error-msg w-100" id="num-least-pref-error"></p>
+                </div>
+              </div>
+
+              <div id="least-courses">
+                
+              </div>
+
+              <div class="post-box remove-padding mb-4">
+                <div class="row widget-sidebar form-group">
+                  <p>
+                    Other Info?
+                    <br>
+                    <span class="label-description">Any other information you want to provide?</span>
+                    <br>
+                  </p>
+                  <input type="text" class="form-control" id="other-info" name="other-info" placeholder="Your Answer" />
+                </div>
+              </div>
               <div class="text-center">
                 <button type="submit" class="btn btn-success btn-lg">Submit</button>
               </div>
@@ -210,10 +251,9 @@
   <script src="assets/vendor/wow/wow.min.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/mock.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </body>
