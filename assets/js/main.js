@@ -85,174 +85,213 @@
   var programs = ["-Select-", "B.Tech", "M.Tech", "MSc", "MA", "PhD"];
   // https://beautifytools.com/excel-to-json-converter.php
   var courses = {
-      "Sheet1": [
-          {
-              "Course Code": "HS 104",
-              "Course Name": "Foundational Sanskrit",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 108",
-              "Course Name": "Japan Studies",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 111",
-              "Course Name": "Urdu Script & Poetry",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 112",
-              "Course Name": "Urdu Poetry Interpretation",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 211",
-              "Course Name": "Exploring India’s Scientific and Technological Heritage",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 223",
-              "Course Name": "Sanskrit Literature",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 305",
-              "Course Name": "Perspectives in Psychology",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 391",
-              "Course Name": "Special Topics in HSS: Music Traditions of India",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 313",
-              "Course Name": "When You Cannot Experiment: Social Science Methods",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 411",
-              "Course Name": "Economic Concepts and Issues in Project Analysis",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 425",
-              "Course Name": "Introduction to Archaeology",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 491-I",
-              "Course Name": "Special Topics in HSS: Indian philosophy through the ages",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 491-II",
-              "Course Name": "Special Topics in HSS: The ‘engineering’ of theatre-making",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 491-III",
-              "Course Name": "Special Topics in HSS: Storytelling for the Digital Era",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 507",
-              "Course Name": "Humanism, Anti-Humanism, and Posthumanism",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 510",
-              "Course Name": "Perspectives on Indian Civilization",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 512",
-              "Course Name": "Political Thought",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 515",
-              "Course Name": "The Politics of the Environment",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 518",
-              "Course Name": "Philosophy, Cognition and Psychoanalysis",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 519",
-              "Course Name": "Linguistic Anthropology",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 610",
-              "Course Name": "A Critical Journey Through Select Thoughts and Theories",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 645",
-              "Course Name": "History of India, 1930-1964",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 691-I",
-              "Course Name": "Special Topics in HSS: Themes in Postcolonialism",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 691-II",
-              "Course Name": "Special topics in HSS: Applied statistics: Multilevel modeling",
-              "Course Cap": "30"
-          },
-          {
-              "Course Code": "IN 304",
-              "Course Name": "Ancient Indian Technology",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "MS 304",
-              "Course Name": "Organizational Behaviour & Human Resource Management (OB & HRM)",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "MS 403",
-              "Course Name": "Engineering Entrepreneurship",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "MS 491",
-              "Course Name": "Special topics in Management: Marketing Analytics",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 691-III",
-              "Course Name": "Special Topics in HSS: Abnormal Psychology",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "HS 327",
-              "Course Name": "Anthropology, Citizenship and Human Rights (Half Sem course, 2nd Half)",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "MS 492",
-              "Course Name": "Special Topics in Management: Finance Management (2 credit course that will run for entire semester, ~2 hours each week)",
-              "Course Cap": "40"
-          },
-          {
-              "Course Code": "MS 491-I",
-              "Course Name": "Special Topics in Management: Product Management",
-              "Course Cap": "40"
-          }
-      ]
+    "Sheet1": [
+        {
+            "Course Code": "IN 304",
+            "Course Title": "Ancient Indian Technology",
+            "L": "3",
+            "T": "1",
+            "P": "0",
+            "C": "4",
+            "Instructor": "Alok Kumar Kanungo (I+T)",
+            "Cap": "40"
+        },
+        {
+            "Course Code": "HS 104 ",
+            "Course Title": "Foundational Sanskrit",
+            "L": "3",
+            "T": "1",
+            "P": "0",
+            "C": "4",
+            "Instructor": "Mana Shah (I+T)",
+            "Time Slot Lecture": "G",
+            "Cap": "40"
+        },
+        {
+            "Course Code": "HS 111 ",
+            "Course Title": "Urdu Script & Poetry",
+            "L": "3",
+            "T": "1",
+            "P": "0",
+            "C": "4",
+            "Instructor": "Mohd. Mubashshir Ahsan (I+T)",
+            "Time Slot Lecture": "R",
+            "Time Slot Tutorial": "P1",
+            "Cap": "40"
+        },
+        {
+            "Course Code": "HS 112 ",
+            "Course Title": "Urdu Poetry Interpretation",
+            "L": "3",
+            "T": "1",
+            "P": "0",
+            "C": "4",
+            "Instructor": "Mohd. Mubashshir Ahsan (I+T)",
+            "Time Slot Lecture": "J",
+            "Time Slot Tutorial": "P2",
+            "Cap": "40"
+        },
+        {
+            "Course Code": "HS 211",
+            "Course Title": "Introduction to the History of Science and Technology in India",
+            "L": "3",
+            "T": "0",
+            "P": "0",
+            "C": "4",
+            "Instructor": "Michel Danino",
+            "Time Slot Lecture": "L",
+            "Cap": "40"
+        },
+        {
+            "Course Code": "HS 223 ",
+            "Course Title": "Sanskrit Literature",
+            "L": "3",
+            "T": "1",
+            "P": "0",
+            "C": "4",
+            "Instructor": "Mana Shah (I+T)",
+            "Time Slot Lecture": "J",
+            "Time Slot Tutorial": "P2",
+            "Cap": "40"
+        },
+        {
+            "Course Code": "HS 313 ",
+            "Course Title": "When You Cannot Experiment: Social Science Methods",
+            "L": "3",
+            "T": "0",
+            "P": "0",
+            "C": "4",
+            "Instructor": "Malavika Subramanyam",
+            "Time Slot Lecture": "J",
+            "Cap": "40"
+        },
+        {
+            "Course Code": "HS 421 ",
+            "Course Title": "Introduction to Linguistics",
+            "L": "3",
+            "T": "0",
+            "P": "0",
+            "C": "4",
+            "Instructor": "Nishaant Choksi",
+            "Time Slot Lecture": "L",
+            "Cap": "40"
+        },
+        {
+            "Course Code": "HS 425 ",
+            "Course Title": "Introduction to Archaeology",
+            "L": "3",
+            "T": "0",
+            "P": "0",
+            "C": "4",
+            "Instructor": "Sharada Channarayapatna",
+            "Time Slot Lecture": "H",
+            "Cap": "40"
+        },
+        {
+            "Course Code": "HS 505",
+            "Course Title": "Research Methods in Humanities and Social Sciences",
+            "L": "3",
+            "T": "0",
+            "P": "0",
+            "C": "4",
+            "Instructor": "Ambika Aiyadurai, Malavika Subramanyam",
+            "Cap": "10"
+        },
+        {
+            "Course Code": "HS 507 ",
+            "Course Title": "Humanism, Anti-Humanism, and Posthumanism",
+            "L": "3",
+            "T": "0",
+            "P": "0",
+            "C": "4",
+            "Instructor": "Angus McBlane",
+            "Time Slot Lecture": "H",
+            "Cap": "40"
+        },
+        {
+            "Course Code": "HS 510 ",
+            "Course Title": "Perspectives on Indian Civilization",
+            "L": "3",
+            "T": "0",
+            "P": "0",
+            "C": "4",
+            "Instructor": "Michel Danino (I)",
+            "Time Slot Lecture": "E",
+            "Cap": "10"
+        },
+        {
+            "Course Code": "HS 512",
+            "Course Title": "Political Thought",
+            "L": "3",
+            "T": "0",
+            "P": "0",
+            "C": "4",
+            "Instructor": "Dyotana Banerjee (I)",
+            "Time Slot Lecture": "K",
+            "Cap": "10"
+        },
+        {
+            "Course Code": "HS 517",
+            "Course Title": "Literary Experiment in European Modernism",
+            "L": "3",
+            "T": "0",
+            "P": "0",
+            "C": "4",
+            "Instructor": "Arka Chattopadhyay",
+            "Time Slot Lecture": "K",
+            "Cap": "40"
+        },
+        {
+            "Course Code": "HS 519 ",
+            "Course Title": "Linguistic Anthropology",
+            "L": "3",
+            "T": "0",
+            "P": "0",
+            "C": "4",
+            "Instructor": "Nishaant Choksi",
+            "Time Slot Lecture": "G",
+            "Cap": "40"
+        },
+        {
+            "Course Code": "HS 645 ",
+            "Course Title": "History of India, 1930-1964",
+            "L": "3",
+            "T": "0",
+            "P": "0",
+            "C": "4",
+            "Instructor": "Madhumita Sengupta",
+            "Time Slot Lecture": "M",
+            "Cap": "40"
+        },
+        {
+            "Course Code": "HS 647",
+            "Course Title": "Literature, Theory, and Social Context",
+            "L": "3",
+            "T": "0",
+            "P": "0",
+            "C": "4",
+            "Instructor": "Angus McBlane (I)",
+            "Time Slot Lecture": "L",
+            "Cap": "10"
+        },
+        {
+            "Course Code": "HS 691",
+            "Course Title": "Special Topics in Humanities and Social Sciences: World English",
+            "L": "3",
+            "T": "0",
+            "P": "0",
+            "C": "4",
+            "Instructor": "Jooyoung Kim (I)",
+            "Time Slot Lecture": "R",
+            "Cap": "40"
+        }
+    ]
   };
   courses = courses["Sheet1"];
   var course_list = [];
   var num_courses = courses.length;
   for(var i=0;i<num_courses;i++){
-    course_list.push([courses[i]["Course Code"],courses[i]["Course Name"]]);
+    course_list.push([courses[i]["Course Code"],courses[i]["Course Title"]]);
   }
   console.log(course_list);
   var temp = '<div id="preference-1" class="post-box remove-padding">\n<div class="row widget-sidebar form-group">\n<p>\nPreference #1 <sup class="required">*</sup>\n <br>\n </p>\n <select class="form-control prefs" id="pref1" name="pref1" placeholder="Your Answer">\n <option value="-Select-">-Select-</option>\n   </select>\n  <p class="error-msg" id="pref1-error"></p>\n  </div>\n</div>';

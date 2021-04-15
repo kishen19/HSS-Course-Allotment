@@ -1,9 +1,11 @@
 class Course:
-    def __init__(self,code: str, name: str, cap: int):
+    def __init__(self,code: str, name: str, cap: int, lecture_slots: list, tutorial_slots: list):
         self.code = code
         self.name = name if name else ''
         self.cap = cap
         self.students = []
+        self.lecture_slots = lecture_slots
+        self.tutorial_slots = tutorial_slots
         # Private vars
         self.rem = cap
         self.requests = []
