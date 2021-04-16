@@ -83,6 +83,7 @@
   var error_width = "3px";
   var w = (new Date).getFullYear();
   var programs = ["-Select-", "B.Tech", "M.Tech", "MSc", "MA", "PhD"];
+  var code_length = 8;
   // https://beautifytools.com/excel-to-json-converter.php
   var courses = {
     "Sheet1": [
@@ -94,6 +95,8 @@
             "P": "0",
             "C": "4",
             "Instructor": "Alok Kumar Kanungo (I+T)",
+            "Time Slot Lecture": "H",
+            "Time Slot Tutorial": "I3",
             "Cap": "40"
         },
         {
@@ -105,6 +108,7 @@
             "C": "4",
             "Instructor": "Mana Shah (I+T)",
             "Time Slot Lecture": "G",
+            "Time Slot Tutorial": "P1",
             "Cap": "40"
         },
         {
@@ -195,6 +199,7 @@
             "P": "0",
             "C": "4",
             "Instructor": "Ambika Aiyadurai, Malavika Subramanyam",
+            "Time Slot Lecture": "D",
             "Cap": "10"
         },
         {
@@ -275,7 +280,7 @@
             "Cap": "10"
         },
         {
-            "Course Code": "HS 691",
+            "Course Code": "HS 591",
             "Course Title": "Special Topics in Humanities and Social Sciences: World English",
             "L": "3",
             "T": "0",
@@ -432,6 +437,12 @@
       $(this).css("border-width", error_width);
       $('#code-error').css("display", "block");
       $('#code-error').text("This is a required question");
+    }
+    else if($('#code').val().length !== code_length){
+      $(this).css("border-color", error_color);
+      $(this).css("border-width", error_width);
+      $('#code-error').css("display", "block");
+      $('#code-error').text("The Unique Code shared with you is of length 8");
     }
     else {
       $(this).css("border-color", border_color);
@@ -670,13 +681,20 @@
       }
     }
 
-    /* Unique Code */
+    /* Validating Unique Code */
     if (!$('#code').val()) {
       failed = true;
       $('#code-error').css("display", "block");
       $('#code-error').text("This is a required question");
       $('#code').css("border-color", error_color);
       $('#code').css("border-width", error_width);
+    }
+    else if($('#code').val().length !== code_length){
+      failed = true;
+      $('#code').css("border-color", error_color);
+      $('code').css("border-width", error_width);
+      $('#code-error').css("display", "block");
+      $('#code-error').text("The Unique Code shared with you is of length 8");
     }
 
     /* Number of Courses Required */
