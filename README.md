@@ -54,7 +54,7 @@ Once you complete the above steps, the responses from the form are stored in the
 ## Final Allocation
 Folder: `/code`
 
-The final component is the Course Allocation. This step is to be executed after receiving the final responses from students. The details of the algorithm used for student-course allocation is described [here](link).
+The final component is the Course Allocation. This step is to be executed after receiving the final responses from students. The details of the algorithm used for student-course allocation is described [here](https://docs.google.com/document/d/1MDDga0pknnDucc_b_L-6TgLIVnN_6qPMclboX-JUq8Y/edit?usp=sharing).
 
 To run the allocation code, below are the requirements.
 
