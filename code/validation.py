@@ -1,5 +1,12 @@
+'''
+Code for testing the final allocations to avoid mishaps
+
+Error Messages (exceptions) below explain the conditions checked
+
+'''
 from collections import defaultdict
-def validation(students,courses):
+
+def validation(courses,students):
     coures_codes = {c.code for c in courses}
     course_studentroll_map = {c.code:sorted(c.students) for c in courses}
     student_rolls = {stud.roll for stud in students}

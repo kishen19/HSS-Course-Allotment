@@ -1,0 +1,35 @@
+#############################################################################################
+# The paths to the input and output files and required parameters
+
+
+## INPUT FILES
+
+STUDENTS_LIST : "./Current List of Students_AY 2020-21.xlsx"
+# path to the file containing the list of students who will pre register
+
+STUDENT_UNIQUE_CODES : "./students_data/Students-Unique Codes Pre-registration 2021-22.xlsx"
+# path to the file containing the unique codes shared to the students for authentication
+
+STUDENT_DATA : "./students_data/HSS Pre-registration 2021-22.xlsx"
+# path to the file containing the students data collected through form
+
+COURSE_DATA : "./courses_data/HSS Courses 2021-22 Sem1.xlsx"
+# path to the file containing the courses data
+
+
+## OUTPUT FILES
+
+STUDENT_ALLOCATION : "./output/HSS Pre-Registration 2021-22 - Students Allocation.xlsx"
+# path where final allocation is stored student wise
+
+COURSE_ALLOCATION : "./output/HSS Pre-Registration 2021-22 - Courses Allocation.xlsx"
+# path where final allocation is stored course wise
+
+INSIGHTS_PATH : "./insights"
+# path to store the insights
+
+
+## INPUT PARAM
+
+NUM_ITERATIONS : 1000
+# number of time to run allocation for better results (1000 iterations take 2 mins approx)
