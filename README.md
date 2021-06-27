@@ -24,7 +24,7 @@ Run the following command (inside the `/generate_codes` folder).
 python code_generation.py
 </pre>
 
-In case you need to generate a new code for a student for whom the code was not generated before, you can run use the `code_addition.py` file.
+In case you need to generate a new code for a student for whom the code was not generated before, you can use the `code_addition.py` file.
 <pre>
 python code_addition.py
 </pre>
