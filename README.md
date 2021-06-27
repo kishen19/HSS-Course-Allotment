@@ -44,7 +44,7 @@ The form validation can be found in `index.js`. Go through this file to understa
 We used Google App Script for this purpose. 
 - Create a spreadsheet on Google Sheets.
 - Go to `Tools`, then `Script Editor`
-- Copy the code prsent in `form/code.gs` and paste it in the script editor.
+- Copy the code present in `form/code.gs` and paste it in the script editor.
 - In the toolbar, select the function `setup` and click `Run`.
 - Select `Deploy`, then `New Deployment`. Under `Web app`, choose `Me` option under `Execute as`, and `Anyone` under `Who has access`. Then, Deploy.
 - Copy the URL of the Web app and paste it in `index.js` (at the variable `scriptURL`).
